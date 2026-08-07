@@ -28,6 +28,7 @@
   var templateName = document.getElementById("templateName");
   var templateEditButton = document.getElementById("templateEditButton");
   var closeGatewayButton = document.getElementById("closeGateway");
+  var payBadge = document.getElementById("payBadge");
   var savedRange = null;
 
   function money(value) {
@@ -100,17 +101,19 @@
 
     document.getElementById("previewCompanyMeta").innerHTML = [
       companyName.value || "ABC 3",
-      companyPhone.value || "-",
+      "+92447475763830",
       "Oxford Street",
-      "United Kingdom"
+      "London, Greater London",
+      "W1C 1JT",
+      "GB"
     ].join("<br>");
 
     document.getElementById("previewBilledTo").innerHTML = [
-      companyName.value || "ABC 3",
-      companyAddress.value || "-"
+      "John's Company",
+      "John Doe 1234 Main Street Austin, Texas 54321 US"
     ].join("<br>");
 
-    document.getElementById("previewInvoiceNumber").textContent = "INV-" + (invoiceNumber.value || "2");
+    document.getElementById("previewInvoiceNumber").textContent = "INV-" + String(invoiceNumber.value || "2").padStart(6, "0");
   }
 
   function updateInvoice() {
@@ -149,8 +152,10 @@
     document.getElementById("previewSubtotal").textContent = money(subtotal);
     document.getElementById("previewTax").textContent = money(totalTax);
     document.getElementById("previewAmountDue").textContent = money(amountDue);
-    document.getElementById("payBadge").textContent = "Pay " + money(amountDue);
-    document.getElementById("previewIssueDate").textContent = "August 7, 2026";
+    if (payBadge) {
+      payBadge.textContent = "Pay " + money(amountDue);
+    }
+    document.getElementById("previewIssueDate").textContent = "August 4, 2026";
     document.getElementById("previewDueDate").textContent = "August 18, 2026";
 
     updateBusinessPreview();
@@ -303,8 +308,8 @@
     editorImageInput.value = "";
   });
 
-  addRow({ name: "", price: 0, qty: 0, tax: 0 });
-  addRow({ name: "", price: 0, qty: 0, tax: 0 });
+  addRow({ name: "Enter item name", price: 0, qty: 0, tax: 0 });
+  addRow({ name: "Enter item name", price: 0, qty: 0, tax: 0 });
   notesEditor.innerHTML = "";
   notesEditor.style.lineHeight = lineHeightSelect.value;
   updateInvoice();

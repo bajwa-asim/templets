@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Invoice Template</title>
+  <title>Estimate Template</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
@@ -34,17 +34,6 @@
       <div class="row no-gutters">
         <div class="col-xl-6 col-lg-7">
           <div class="editor-panel">
-            <div class="panel-card gateway-card" id="gatewayCard">
-              <div class="gateway-head">
-                <div class="gateway-message">
-                  <span class="info-dot">i</span>
-                  Connect at least one payment gateway to start receiving payments
-                </div>
-                <button type="button" class="card-close" id="closeGateway">&times;</button>
-              </div>
-              <button type="button" class="btn btn-light gateway-btn">Integrate Payment Gateway</button>
-            </div>
-
             <div class="panel-card">
               <div class="card-heading">
                 <div class="card-title-row">
@@ -82,13 +71,13 @@
 
             <div class="panel-card">
               <div class="card-heading">
-                <h2>We need option for invoice</h2>
+                <h2>We need option for estimate</h2>
                 <button type="button" class="arrow-btn">&rsaquo;</button>
               </div>
               <div class="form-group mb-0">
-                <label for="invoiceNumber">Invoice Number</label>
+                <label for="invoiceNumber">Estimate Number</label>
                 <div class="invoice-number-box">
-                  <span class="prefix-box">INV-</span>
+                  <span class="prefix-box">EST-</span>
                   <input type="text" id="invoiceNumber" class="form-control invoice-number-input" value="2">
                 </div>
               </div>
@@ -275,9 +264,11 @@
 
               <div class="company-meta" id="previewCompanyMeta">
                 ABC 3<br>
-                +13141236547<br>
+                +92447475763830<br>
                 Oxford Street<br>
-                United Kingdom
+                London, Greater London<br>
+                W1C 1JT<br>
+                GB
               </div>
 
               <div class="preview-meta-grid">
@@ -287,7 +278,7 @@
                 </div>
                 <div>
                   <h4>Invoice Number</h4>
-                  <p id="previewInvoiceNumber">INV-2</p>
+                  <p id="previewInvoiceNumber">INV-000004</p>
                 </div>
                 <div>
                   <h4>Issue Date</h4>
@@ -295,9 +286,7 @@
                   <h4 class="due-date-label">Due Date</h4>
                   <p id="previewDueDate">August 18, 2026</p>
                 </div>
-                <div class="pay-box-wrap">
-                  <div class="pay-badge" id="payBadge">Pay $20.00</div>
-                </div>
+                <div class="pay-box-wrap"></div>
               </div>
 
               <div class="preview-table-wrap">
@@ -318,15 +307,15 @@
               <div class="preview-totals">
                 <div class="preview-total-line">
                   <span>Subtotal</span>
-                  <strong id="previewSubtotal">$0.00</strong>
+                  <strong id="previewSubtotal">$60.00</strong>
                 </div>
                 <div class="preview-total-line">
                   <span>Tax</span>
-                  <strong id="previewTax">$0.00</strong>
+                  <strong id="previewTax">$60.00</strong>
                 </div>
                 <div class="preview-total-line total-due">
                   <span>Amount Due (GBP)</span>
-                  <strong id="previewAmountDue">$0.00</strong>
+                  <strong id="previewAmountDue">$60.00</strong>
                 </div>
               </div>
             </div>
@@ -387,6 +376,6 @@
     </div>
   </template>
 
-  <script src="script.js"></script>
+  <script src="estimate.js"></script>
 </body>
 </html>
