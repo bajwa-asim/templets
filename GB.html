@@ -1,0 +1,1218 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GB Systems – Website Design &amp; Marketing Systems</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&amp;family=Montserrat:wght@600;700;800&amp;display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --gbs-bg: #f9f9f9;
+        --gbs-ink: #1a1c1c;
+        --gbs-muted: #444748;
+        --gbs-line: #747878;
+        --gbs-line2: #c4c7c7;
+        --gbs-orange: #fe6b00;
+        --gbs-s: #fff;
+        --gbs-s1: #f3f3f3;
+        --gbs-s2: #eee;
+        --gbs-s3: #e8e8e8;
+        --gbs-side: clamp(1.25rem, 5vw, 2.5rem);
+        --gbs-pad: clamp(4rem, 10vw, 7.5rem);
+        --gbs-max: 1280px;
+        --gbs-body: "Inter", sans-serif;
+        --gbs-head: "Montserrat", sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        scrollbar-gutter: stable;
+      }
+      body.gbs-body {
+        background: var(--gbs-bg);
+        color: var(--gbs-ink);
+        font-family: var(--gbs-body);
+        font-size: 18px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        padding-top: 80px;
+        margin: 0;
+        overflow-x: hidden;
+      }
+      section[id] {
+        scroll-margin-top: 80px;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 1,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+        vertical-align: middle;
+      }
+      .gbs-wrap {
+        max-width: var(--gbs-max);
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: var(--gbs-side);
+        padding-right: var(--gbs-side);
+        width: 100%;
+      }
+      .gbs-section {
+        padding: var(--gbs-pad) 0;
+      }
+
+      /* Typography */
+      .gbs-display {
+        font-family: var(--gbs-head);
+        font-weight: 800;
+        font-size: 40px;
+        line-height: 1.2;
+        letter-spacing: -0.01em;
+        color: #000;
+        margin: 0;
+        word-wrap: break-word;
+      }
+      .gbs-h-xl {
+        font-family: var(--gbs-head);
+        font-weight: 700;
+        font-size: 32px;
+        line-height: 1.2;
+        margin: 0;
+        word-wrap: break-word;
+      }
+      .gbs-h-lg {
+        font-family: var(--gbs-head);
+        font-weight: 700;
+        font-size: 28px;
+        line-height: 1.3;
+        margin: 0;
+      }
+      .gbs-h-md {
+        font-family: var(--gbs-head);
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 1.4;
+        margin: 0;
+      }
+      .gbs-body {
+        font-size: 18px;
+        line-height: 1.6;
+        color: var(--gbs-muted);
+      }
+      .gbs-body-md {
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .gbs-label {
+        font-family: var(--gbs-head);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        line-height: 1;
+      }
+      .gbs-label-sm {
+        font-size: 12px;
+        font-weight: 500;
+        line-height: 1;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      @media (min-width: 768px) {
+        body.gbs-body {
+          padding-top: 96px;
+        }
+        section[id] {
+          scroll-margin-top: 96px;
+        }
+        .gbs-display {
+          font-size: 64px;
+          line-height: 1.1;
+          letter-spacing: -0.02em;
+        }
+        .gbs-h-xl {
+          font-size: 48px;
+        }
+        .gbs-h-lg {
+          font-size: 32px;
+        }
+      }
+
+      /* Buttons */
+      .gbs-btn {
+        display: inline-block;
+        border: none;
+        cursor: pointer;
+        border-radius: 0.125rem;
+        padding: 0.75rem 1.5rem;
+        font-family: var(--gbs-head);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        line-height: 1;
+        transition: 0.2s ease;
+        text-decoration: none;
+      }
+      .gbs-btn-primary {
+        background: var(--gbs-orange);
+        color: #fff;
+      }
+      .gbs-btn-primary:hover {
+        background: #e66000;
+        color: #fff;
+      }
+      .gbs-btn-lg {
+        padding: 1rem 2rem;
+      }
+      .gbs-btn-xl {
+        padding: 1.25rem 3rem;
+        font-size: 1.125rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s;
+      }
+      .gbs-btn-xl:hover {
+        transform: scale(1.05);
+      }
+      @media (max-width: 767.98px) {
+        .gbs-btn-xl {
+          width: 100%;
+          padding: 1rem 1.5rem;
+          font-size: 1rem;
+        }
+        .gbs-btn-lg {
+          width: 100%;
+          text-align: center;
+        }
+        .gbs-hero-copy {
+          align-items: stretch;
+        }
+        .gbs-tcard,
+        .gbs-feat-card {
+          padding: 1.5rem;
+        }
+        .gbs-proof-head,
+        .gbs-feat-head,
+        .gbs-process-head {
+          margin-bottom: 2.5rem;
+        }
+        .gbs-trust-logos span {
+          font-size: 18px;
+        }
+        .gbs-hero-badge {
+          padding: 1rem 1.25rem;
+        }
+        .gbs-hero-section {
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+        .gbs-hero-copy .gbs-display {
+          font-size: 32px;
+        }
+      }
+      @media (min-width: 768px) and (max-width: 1023.98px) {
+        .gbs-hero-section {
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+      }
+
+      /* Card */
+      .gbs-card {
+        border: 1px solid var(--gbs-line);
+        background: var(--gbs-s);
+      }
+
+      /* Header — same .gbs-wrap edges as page content */
+      .gbs-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1050;
+        background: rgba(249, 249, 249, 0.95);
+        backdrop-filter: blur(4px);
+        border-bottom: 2px solid #000;
+      }
+      .gbs-header-inner {
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding-top: 0.75rem;
+        padding-bottom: 0.75rem;
+      }
+      .gbs-logo {
+        font-family: var(--gbs-head);
+        font-weight: 700;
+        font-size: 24px;
+        color: #000;
+        line-height: 1.4;
+        white-space: nowrap;
+      }
+      .gbs-nav {
+        display: none;
+        flex-wrap: nowrap;
+        gap: clamp(1rem, 2.5vw, 2rem);
+        align-items: center;
+      }
+      .gbs-nav a {
+        color: var(--gbs-ink);
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.2s;
+        white-space: nowrap;
+      }
+      .gbs-nav a:hover {
+        color: #a04100;
+      }
+      .gbs-menu-btn {
+        background: none;
+        border: none;
+        color: #000;
+        padding: 0;
+        display: block;
+      }
+      .gbs-header .gbs-btn {
+        display: none;
+        white-space: nowrap;
+      }
+      .gbs-nav.gbs-nav-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: var(--gbs-bg);
+        border-bottom: 2px solid #000;
+        padding: 1rem var(--gbs-side) 1.5rem;
+        gap: 1rem;
+      }
+      @media (min-width: 768px) {
+        .gbs-nav {
+          display: flex;
+        }
+        .gbs-menu-btn {
+          display: none;
+        }
+        .gbs-header .gbs-btn {
+          display: inline-block;
+        }
+      }
+
+      /* Sticky mobile CTA */
+      .gbs-mobile-cta {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 1rem var(--gbs-side);
+        background: rgba(249, 249, 249, 0.9);
+        backdrop-filter: blur(4px);
+        border-top: 1px solid var(--gbs-line2);
+        z-index: 1040;
+      }
+      .gbs-mobile-cta .gbs-btn {
+        width: 100%;
+        padding: 1rem;
+      }
+      @media (min-width: 768px) {
+        .gbs-mobile-cta {
+          display: none;
+        }
+      }
+
+      /* Hero */
+      .gbs-hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+      }
+      .gbs-hero-copy {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        align-items: flex-start;
+        width: 100%;
+      }
+      .gbs-hero-copy .gbs-body {
+        max-width: 32rem;
+      }
+      .gbs-trust {
+        margin-top: 4rem;
+        padding-top: 5rem;
+        border-top: 1px solid var(--gbs-line2);
+        width: 100%;
+      }
+      .gbs-trust-label {
+        color: var(--gbs-line);
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+      .gbs-trust-logos {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.6;
+        filter: grayscale(1);
+      }
+      .gbs-trust-logos span {
+        font-family: var(--gbs-head);
+        font-weight: 700;
+        font-size: 24px;
+      }
+      .gbs-hero-media {
+        width: 100%;
+        position: relative;
+        margin-bottom: 1.5rem;
+      }
+      .gbs-hero-frame {
+        height: 18rem;
+        padding: 0.5rem;
+        position: relative;
+      }
+      .gbs-hero-img {
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        border-radius: 0.125rem;
+      }
+      .gbs-hero-badge {
+        position: absolute;
+        bottom: -1.5rem;
+        left: 0;
+        background: var(--gbs-orange);
+        color: #fff;
+        padding: 1.5rem;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+        border-radius: 0.125rem;
+      }
+      .gbs-hero-badge .gbs-h-md {
+        color: #fff;
+      }
+      .gbs-hero-badge .gbs-label {
+        margin-top: 0.25rem;
+        display: block;
+      }
+      @media (min-width: 1024px) {
+        .gbs-hero {
+          flex-direction: row;
+          gap: 3rem;
+        }
+        .gbs-hero-copy,
+        .gbs-hero-media {
+          width: calc(50% - 1.5rem);
+        }
+        .gbs-hero-media {
+          margin-bottom: 0;
+        }
+        .gbs-hero-frame {
+          height: 24rem;
+        }
+        .gbs-hero-badge {
+          left: -1.5rem;
+        }
+      }
+
+      /* Social proof */
+      .gbs-proof {
+        background: var(--gbs-s2);
+      }
+      .gbs-proof-head {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+      .gbs-proof-head .gbs-h-xl {
+        color: #000;
+        margin-bottom: 1rem;
+      }
+      .gbs-proof-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .gbs-tcard {
+        padding: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        border-radius: 8px;
+      }
+      .gbs-stars {
+        display: flex;
+        color: var(--gbs-orange);
+      }
+      .gbs-tcard p {
+        font-size: 16px;
+        line-height: 1.6;
+        font-style: italic;
+        flex-grow: 1;
+        margin: 0;
+      }
+      .gbs-tcard-dark {
+        background: #000;
+        color: #fff;
+      }
+      .gbs-tcard-dark .gbs-label {
+        color: #fff;
+      }
+      .gbs-tcard .gbs-label-sm {
+        color: var(--gbs-line);
+        margin-top: 0.25rem;
+        display: block;
+      }
+      .gbs-tcard-dark .gbs-label-sm {
+        color: var(--gbs-line2);
+      }
+      @media (min-width: 768px) {
+        .gbs-proof-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (min-width: 992px) {
+        .gbs-proof-grid {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      /* Features */
+      .gbs-feat-head {
+        margin-bottom: 4rem;
+      }
+      .gbs-feat-head .gbs-h-xl {
+        color: #000;
+        margin-bottom: 1rem;
+        border-left: 8px solid var(--gbs-orange);
+        padding-left: 1.5rem;
+      }
+      .gbs-feat-head .gbs-body {
+        max-width: 42rem;
+      }
+      .gbs-feat-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .gbs-feat-card {
+        padding: 2rem;
+        transition: border-color 0.2s;
+      }
+      .gbs-feat-card:hover {
+        border-color: var(--gbs-orange);
+      }
+      .gbs-feat-card.gbs-alt {
+        background: var(--gbs-s3);
+      }
+      .gbs-feat-icon {
+        width: 4rem;
+        height: 4rem;
+        background: var(--gbs-s2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.125rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--gbs-line2);
+      }
+      .gbs-feat-card.gbs-alt .gbs-feat-icon {
+        background: var(--gbs-bg);
+      }
+      .gbs-feat-icon .material-symbols-outlined {
+        font-size: 1.875rem;
+        color: #000;
+      }
+      .gbs-feat-icon .gbs-icon-orange {
+        color: var(--gbs-orange);
+      }
+      .gbs-feat-card .gbs-h-lg {
+        color: #000;
+        margin-bottom: 1rem;
+      }
+      @media (min-width: 768px) {
+        .gbs-feat-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      /* Trades */
+      .gbs-trades {
+        background: #000;
+        color: #fff;
+        border-top: 2px solid var(--gbs-line);
+        border-bottom: 2px solid var(--gbs-line);
+        text-align: center;
+      }
+      .gbs-trades .gbs-h-xl {
+        margin-bottom: 3rem;
+      }
+      .gbs-trade-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .gbs-trade-chip {
+        background: var(--gbs-s2);
+        color: #000;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.125rem;
+        font-family: var(--gbs-head);
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        border: 1px solid var(--gbs-line);
+      }
+
+      /* Process */
+      .gbs-process-head {
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+      .gbs-process-head .gbs-h-xl {
+        color: #000;
+        margin-bottom: 1rem;
+      }
+      .gbs-steps {
+        display: flex;
+        flex-direction: column;
+        gap: 2.5rem;
+        position: relative;
+        justify-content: space-between;
+        padding-top: 1.5rem;
+      }
+      .gbs-steps-line {
+        display: none;
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: var(--gbs-line2);
+        z-index: 0;
+        transform: translateY(-50%);
+      }
+      .gbs-step {
+        padding: 2rem;
+        flex: 1;
+        text-align: center;
+        background: var(--gbs-bg);
+        position: relative;
+        z-index: 1;
+      }
+      .gbs-step-num {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--gbs-head);
+        font-weight: 700;
+        font-size: 24px;
+        position: absolute;
+        top: -1.5rem;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #fff;
+      }
+      .gbs-step-num.gbs-orange {
+        background: var(--gbs-orange);
+      }
+      .gbs-step-num.gbs-dark {
+        background: #000;
+      }
+      .gbs-step .gbs-h-lg {
+        color: #000;
+        margin: 1.5rem 0 1rem;
+      }
+      .gbs-step .gbs-body-md {
+        color: var(--gbs-muted);
+        margin-bottom: 1rem;
+      }
+      .gbs-step-meta {
+        display: inline-flex;
+        align-items: center;
+        background: var(--gbs-s2);
+        padding: 0.25rem 0.75rem;
+        border-radius: 0.125rem;
+        font-size: 12px;
+        font-weight: 500;
+        border: 1px solid var(--gbs-line2);
+      }
+      .gbs-step-meta .material-symbols-outlined {
+        font-size: 0.875rem;
+        margin-right: 0.25rem;
+      }
+      @media (min-width: 1024px) {
+        .gbs-steps {
+          flex-direction: row;
+        }
+        .gbs-steps-line {
+          display: block;
+        }
+      }
+
+      /* FAQ */
+      .gbs-faq {
+        background: var(--gbs-s1);
+        border-top: 1px solid var(--gbs-line2);
+      }
+      .gbs-faq-inner {
+        max-width: 48rem;
+        margin: 0 auto;
+        padding: 0 var(--gbs-side);
+      }
+      .gbs-faq .gbs-h-xl {
+        color: #000;
+        margin-bottom: 3rem;
+        text-align: center;
+      }
+      .gbs-faq-list {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .gbs-faq-item {
+        padding: 1.5rem;
+        background: var(--gbs-bg);
+        cursor: pointer;
+      }
+      .gbs-faq-item summary {
+        font-family: var(--gbs-head);
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 1.4;
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 0.75rem;
+        cursor: pointer;
+      }
+      @media (min-width: 768px) {
+        .gbs-faq-item summary {
+          font-size: 24px;
+          align-items: center;
+        }
+      }
+      .gbs-faq-item summary::-webkit-details-marker {
+        display: none;
+      }
+      .gbs-faq-item summary .material-symbols-outlined {
+        transition: transform 0.2s;
+        flex-shrink: 0;
+      }
+      .gbs-faq-item[open] summary .material-symbols-outlined {
+        transform: rotate(180deg);
+      }
+      .gbs-faq-item .gbs-body {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--gbs-line2);
+      }
+
+      /* Final CTA */
+      .gbs-cta {
+        background: #000;
+        color: #fff;
+        padding: var(--gbs-pad) 0;
+        border-top: 4px solid var(--gbs-orange);
+        position: relative;
+        overflow: hidden;
+        text-align: center;
+      }
+      .gbs-cta-dots {
+        position: absolute;
+        inset: 0;
+        opacity: 0.1;
+        background-image: radial-gradient(#fff 1px, transparent 1px);
+        background-size: 16px 16px;
+      }
+      .gbs-cta-inner {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .gbs-cta .gbs-display {
+        color: #fff;
+        margin-bottom: 1.5rem;
+        max-width: 48rem;
+      }
+      .gbs-cta .gbs-body {
+        color: var(--gbs-line2);
+        margin-bottom: 2.5rem;
+        max-width: 36rem;
+      }
+
+      /* Footer */
+      .gbs-footer {
+        background: #000;
+        border-top: 2px solid #464747;
+        padding: var(--gbs-pad) 0 6rem;
+      }
+      .gbs-footer-inner {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: var(--gbs-side);
+      }
+      .gbs-footer .gbs-logo {
+        color: #fff;
+      }
+      .gbs-footer-copy {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+        line-height: 1.6;
+        max-width: 20rem;
+        margin-top: 1rem;
+      }
+      .gbs-footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      .gbs-footer-col {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+      .gbs-footer-col a {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 12px;
+        font-weight: 500;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .gbs-footer-col a:hover {
+        color: #fff;
+      }
+      @media (min-width: 768px) {
+        .gbs-footer {
+          padding-bottom: 8rem;
+        }
+        .gbs-footer-inner {
+          flex-direction: row;
+        }
+        .gbs-footer-links {
+          flex-direction: row;
+          gap: 4rem;
+        }
+      }
+    </style>
+  </head>
+  <body class="gbs-body">
+    <header class="gbs-header">
+      <div class="gbs-wrap gbs-header-inner">
+        <div class="gbs-logo">GB Systems</div>
+        <nav class="gbs-nav" id="gbsNav">
+          <a href="#features">Features</a>
+          <a href="#industries">Industries</a>
+          <a href="#how-it-works">How it Works</a>
+          <a href="#faq">FAQ</a>
+        </nav>
+        <button class="gbs-btn gbs-btn-primary" type="button">
+          Book a Demo
+        </button>
+        <button
+          class="gbs-menu-btn"
+          type="button"
+          aria-label="Menu"
+          aria-expanded="false"
+          aria-controls="gbsNav"
+          id="gbsMenuBtn"
+        >
+          <span class="material-symbols-outlined">menu</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="gbs-mobile-cta">
+      <button class="gbs-btn gbs-btn-primary" type="button">Book a Demo</button>
+    </div>
+
+    <section class="gbs-wrap gbs-section gbs-hero-section">
+      <div class="gbs-hero">
+        <div class="gbs-hero-copy">
+          <h1 class="gbs-display">
+            Website Design &amp; Marketing Systems For Businesses
+          </h1>
+          <p class="gbs-body">
+            Marketing isn't rocket science. We give you the tools to win. Built
+            for tradesmen who want to work on their business, not in it.
+          </p>
+          <div class="mt-2">
+            <button class="gbs-btn gbs-btn-primary gbs-btn-lg" type="button">
+              Book a Demo
+            </button>
+          </div>
+        </div>
+        <div class="gbs-hero-media">
+          <div class="gbs-card gbs-hero-frame">
+            <div
+              class="gbs-hero-img"
+              style="
+                background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAawtLptCMpHustEPfkEAWidCP3sm3JPZ0-iU3_ThsW8O0c_4bNsJCz3N2rJ5MABjJtvzz7TDIAxCGeocty9ITvOhxdrIzgKgftMn59IrlOGwEpo4nBp9q-hHUl-zIeh8MFBSbR_OTw7HUsJTiD8VflrT4eOEZz43nj6wPpd1NOjXnqRp-XrMo78Mg_5tp_QISTk4gET04QXiWyRIZi8ZTPc5_4WiqpQzmBBsH1m-PifspGG_W27rSZfA&quot;);
+              "
+            ></div>
+            <div class="gbs-hero-badge">
+              <p class="gbs-h-md">300%</p>
+              <span class="gbs-label">Increase in Calls</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="gbs-trust">
+        <p class="gbs-label-sm gbs-trust-label">Trusted by local businesses</p>
+        <div class="gbs-trust-logos">
+          <span>PROBUILD</span><span>HVAC Pro</span><span>Elite Electric</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="gbs-proof gbs-section">
+      <div class="gbs-wrap">
+        <div class="gbs-proof-head">
+          <h2 class="gbs-h-xl">The proof is in the pudding...</h2>
+          <p class="gbs-body">Let's see what our clients have to say.</p>
+        </div>
+        <div class="gbs-proof-grid">
+          <div class="gbs-card gbs-tcard">
+            <div class="gbs-stars">
+              <span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span>
+            </div>
+            <p>
+              "GB Systems completely revamped our online presence. We're getting
+              more qualified leads than ever before."
+            </p>
+            <div>
+              <span class="gbs-label" style="color: #000">Cody</span
+              ><span class="gbs-label-sm">Landscaping Services</span>
+            </div>
+          </div>
+          <div class="gbs-card gbs-tcard gbs-tcard-dark">
+            <div class="gbs-stars">
+              <span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span>
+            </div>
+            <p>
+              "The missed call text back feature alone paid for the system in
+              the first week. Incredible ROI."
+            </p>
+            <div>
+              <span class="gbs-label">Armando</span
+              ><span class="gbs-label-sm">HVAC Contractor</span>
+            </div>
+          </div>
+          <div class="gbs-card gbs-tcard">
+            <div class="gbs-stars">
+              <span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span>
+            </div>
+            <p>
+              "Finally a marketing company that actually understands the trades.
+              Straight shooters, great results."
+            </p>
+            <div>
+              <span class="gbs-label" style="color: #000">Manny</span
+              ><span class="gbs-label-sm">Plumbing Co.</span>
+            </div>
+          </div>
+          <div class="gbs-card gbs-tcard">
+            <div class="gbs-stars">
+              <span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span
+              ><span class="material-symbols-outlined">star</span>
+            </div>
+            <p>
+              "The dashboard makes it so easy to see where our leads are coming
+              from. Highly recommend."
+            </p>
+            <div>
+              <span class="gbs-label" style="color: #000">Wendy</span
+              ><span class="gbs-label-sm">Roofing Specialists</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gbs-wrap gbs-section gbs-hero-section" id="features">
+      <div class="gbs-feat-head">
+        <h2 class="gbs-h-xl">The System</h2>
+        <p class="gbs-body">
+          Everything you need to capture, nurture, and close leads, built into
+          one brutally effective platform.
+        </p>
+      </div>
+      <div class="gbs-feat-grid">
+        <div class="gbs-card gbs-feat-card">
+          <div class="gbs-feat-icon">
+            <span class="material-symbols-outlined">web</span>
+          </div>
+          <h3 class="gbs-h-lg">Functional Website</h3>
+          <p class="gbs-body">
+            A website that actually works as hard as you do. Built to convert
+            traffic into calls, not just look pretty for other designers.
+          </p>
+        </div>
+        <div class="gbs-card gbs-feat-card gbs-alt">
+          <div class="gbs-feat-icon">
+            <span class="material-symbols-outlined gbs-icon-orange"
+              >sms_failed</span
+            >
+          </div>
+          <h3 class="gbs-h-lg">Missed Call Text Back</h3>
+          <p class="gbs-body">
+            Your ex didn't like it when you missed their calls - neither do your
+            customers. Automatically text back missed calls and save the lead.
+          </p>
+        </div>
+        <div class="gbs-card gbs-feat-card">
+          <div class="gbs-feat-icon">
+            <span class="material-symbols-outlined">filter_alt</span>
+          </div>
+          <h3 class="gbs-h-lg">5-Star Magic Funnel</h3>
+          <p class="gbs-body">
+            Automate your reputation. Drive happy customers to leave reviews and
+            intercept unhappy ones before they hit Google.
+          </p>
+        </div>
+        <div class="gbs-card gbs-feat-card">
+          <div class="gbs-feat-icon">
+            <span class="material-symbols-outlined">campaign</span>
+          </div>
+          <h3 class="gbs-h-lg">One-Click Campaigns</h3>
+          <p class="gbs-body">
+            Reactivate past customers with proven text and email templates.
+            Press a button, get more jobs booked on the calendar.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="gbs-trades gbs-section" id="industries">
+      <div class="gbs-wrap">
+        <h2 class="gbs-h-xl">Serving all these trades and more...</h2>
+        <div class="gbs-trade-list">
+          <div class="gbs-trade-chip">
+            <span class="material-symbols-outlined">grass</span> Landscapers
+          </div>
+          <div class="gbs-trade-chip">
+            <span class="material-symbols-outlined">construction</span>
+            Remodeling
+          </div>
+          <div class="gbs-trade-chip">
+            <span class="material-symbols-outlined">pest_control</span> Pest
+            Control
+          </div>
+          <div class="gbs-trade-chip">
+            <span class="material-symbols-outlined">roofing</span> Roofing
+          </div>
+          <div class="gbs-trade-chip">
+            <span class="material-symbols-outlined">ac_unit</span> HVAC
+          </div>
+          <div class="gbs-trade-chip">
+            <span class="material-symbols-outlined">plumbing</span> Plumbing
+          </div>
+          <div class="gbs-trade-chip">
+            <span class="material-symbols-outlined">electrical_services</span>
+            Electrician
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gbs-wrap gbs-section" id="how-it-works">
+      <div class="gbs-process-head">
+        <h2 class="gbs-h-xl">What working with us looks like...</h2>
+        <p class="gbs-body">Simple, fast, and transparent. No bullshit.</p>
+      </div>
+      <div class="gbs-steps">
+        <div class="gbs-steps-line"></div>
+        <div class="gbs-card gbs-step">
+          <div class="gbs-step-num gbs-orange">1</div>
+          <h3 class="gbs-h-lg">Demo Call</h3>
+          <p class="gbs-body-md">
+            A quick 20-minute chat to see if we're a fit. No hard sell.
+          </p>
+          <div class="gbs-step-meta">
+            <span class="material-symbols-outlined">schedule</span> 20 mins
+          </div>
+        </div>
+        <div class="gbs-card gbs-step">
+          <div class="gbs-step-num gbs-orange">2</div>
+          <h3 class="gbs-h-lg">System Build</h3>
+          <p class="gbs-body-md">
+            We get to work building your custom marketing engine.
+          </p>
+          <div class="gbs-step-meta">
+            <span class="material-symbols-outlined">build</span> 7-10 days
+          </div>
+        </div>
+        <div class="gbs-card gbs-step">
+          <div class="gbs-step-num gbs-orange">3</div>
+          <h3 class="gbs-h-lg">Launch Call</h3>
+          <p class="gbs-body-md">
+            We hand over the keys and show you how to drive.
+          </p>
+          <div class="gbs-step-meta">
+            <span class="material-symbols-outlined">rocket_launch</span> 25 mins
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="gbs-faq gbs-section" id="faq">
+      <div class="gbs-faq-inner">
+        <h2 class="gbs-h-xl">Frequently Asked Questions</h2>
+        <div class="gbs-faq-list">
+          <details class="gbs-card gbs-faq-item">
+            <summary>
+              Do I need to sign a long-term contract?<span
+                class="material-symbols-outlined"
+                >expand_more</span
+              >
+            </summary>
+            <p class="gbs-body">
+              No. We believe in earning your business every month. No bullshit
+              contracts holding you hostage.
+            </p>
+          </details>
+          <details class="gbs-card gbs-faq-item">
+            <summary>
+              How much of my time will this take?<span
+                class="material-symbols-outlined"
+                >expand_more</span
+              >
+            </summary>
+            <p class="gbs-body">
+              Very little. Aside from the initial onboarding calls, the system
+              is designed to run in the background and feed you leads
+              automatically.
+            </p>
+          </details>
+          <details class="gbs-card gbs-faq-item">
+            <summary>
+              Will this work for my specific trade?<span
+                class="material-symbols-outlined"
+                >expand_more</span
+              >
+            </summary>
+            <p class="gbs-body">
+              If you deal with local homeowners or businesses needing a service,
+              yes. The fundamental principles of local lead generation apply
+              across trades.
+            </p>
+          </details>
+          <details class="gbs-card gbs-faq-item">
+            <summary>
+              What if I already have a website?<span
+                class="material-symbols-outlined"
+                >expand_more</span
+              >
+            </summary>
+            <p class="gbs-body">
+              We can integrate our marketing systems into your existing site, or
+              build you a high-converting replacement if yours isn't cutting it.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="gbs-cta">
+      <div class="gbs-cta-dots"></div>
+      <div class="gbs-wrap gbs-cta-inner">
+        <h2 class="gbs-display">Ready to get started?</h2>
+        <p class="gbs-body">
+          Want to learn more about how we can help your trades business dominate
+          the local market?
+        </p>
+        <button class="gbs-btn gbs-btn-primary gbs-btn-xl" type="button">
+          Book Your Demo Now
+        </button>
+      </div>
+    </section>
+
+    <footer class="gbs-footer">
+      <div class="gbs-wrap gbs-footer-inner">
+        <div>
+          <div class="gbs-logo">GB Systems</div>
+          <p class="gbs-footer-copy">
+            © 2024 GB Systems. No Contracts. No Bullsh*t.
+          </p>
+        </div>
+        <div class="gbs-footer-links">
+          <div class="gbs-footer-col">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+          </div>
+          <div class="gbs-footer-col">
+            <a href="#">Contact Support</a>
+            <a href="#">Partner Program</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const gbsMenuBtn = document.getElementById("gbsMenuBtn");
+      const gbsNav = document.getElementById("gbsNav");
+
+      gbsMenuBtn.addEventListener("click", () => {
+        const isOpen = gbsNav.classList.toggle("gbs-nav-open");
+        gbsMenuBtn.setAttribute("aria-expanded", isOpen);
+      });
+
+      gbsNav.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          gbsNav.classList.remove("gbs-nav-open");
+          gbsMenuBtn.setAttribute("aria-expanded", "false");
+        });
+      });
+    </script>
+  </body>
+</html>
+
