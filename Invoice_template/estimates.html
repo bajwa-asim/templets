@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="estimate-list-page">
+    <main class="estimate-shell">
+      <section class="estimate-intro">
+        <h1 class="estimate-heading">Estimates</h1>
+        <p class="estimate-copy">Create and Manage all estimates generated for your business</p>
+      </section>
+
+      <section class="estimate-summary" id="summaryCards"></section>
+
+      <section class="estimate-status-tabs" id="statusTabs" aria-label="Estimate status filters">
+        <button type="button" class="estimate-tab is-active" data-status="all">All</button>
+        <button type="button" class="estimate-tab" data-status="draft">Draft</button>
+        <button type="button" class="estimate-tab" data-status="sent">Sent</button>
+        <button type="button" class="estimate-tab" data-status="accepted">Accepted</button>
+        <button type="button" class="estimate-tab" data-status="declined">Declined</button>
+        <button type="button" class="estimate-tab" data-status="invoiced">Invoiced</button>
+      </section>
+
+      <section class="estimate-panel">
+        <div class="estimate-panel-head">
+          <h2 class="estimate-panel-title">Estimates</h2>
+          <a class="estimate-primary-btn" href="create-estimate.html">Create Estimate</a>
+        </div>
+
+        <div class="estimate-filters">
+          <label class="estimate-field">
+            <span>Start Date</span>
+            <div class="estimate-input-wrap">
+              <input type="date" id="startDate" value="2026-01-06">
+              <span class="estimate-input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"></path></svg>
+              </span>
+            </div>
+          </label>
+
+          <label class="estimate-field">
+            <span>End Date</span>
+            <div class="estimate-input-wrap">
+              <input type="date" id="endDate" value="2026-06-01">
+              <span class="estimate-input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8 2v4M16 2v4M3 10h18M5 6h14a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2z"></path></svg>
+              </span>
+            </div>
+          </label>
+        </div>
+
+        <div class="estimate-search-row">
+          <label class="estimate-search" aria-label="Search estimates">
+            <span class="estimate-search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            </span>
+            <input type="search" id="searchInput" placeholder="Search ...">
+          </label>
+        </div>
+
+        <div class="estimate-table-wrap">
+          <table class="estimate-table">
+            <thead>
+              <tr>
+                <th>Quote Name</th>
+                <th>Estimate Number</th>
+                <th>Customer</th>
+                <th>Issue Date</th>
+                <th>Value</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="estimateTableBody"></tbody>
+          </table>
+          <div class="estimate-empty" id="emptyState" hidden>No estimates found for the selected filters.</div>
+        </div>
+
+        <div class="estimate-panel-foot">
+          <div class="estimate-results">
+            <span>Showing</span>
+            <label class="estimate-select-wrap">
+              <select id="pageSizeSelect">
+                <option selected>50</option>
+                <option>25</option>
+                <option>10</option>
+                <option>5</option>
+              </select>
+            </label>
+            <span id="resultsMeta">rows out of 0</span>
+          </div>
+
+          <nav class="estimate-pagination" id="pagination"></nav>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="estimates.js"></script>
+</body>
+</html>
