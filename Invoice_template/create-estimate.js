@@ -14,6 +14,18 @@
   var discountPrefix = document.getElementById("discountPrefix");
   var saveButton = document.getElementById("saveButton");
   var sendButton = document.getElementById("sendButton");
+  var sendModalOverlay = document.getElementById("sendModalOverlay");
+  var sendModalClose = document.getElementById("sendModalClose");
+  var sendModalCancel = document.getElementById("sendModalCancel");
+  var sendModalSubmit = document.getElementById("sendModalSubmit");
+  var sendInvoiceName = document.getElementById("sendInvoiceName");
+  var sendAsRadios = document.querySelectorAll('input[name="sendAs"]');
+  var sendEmailField = document.getElementById("sendEmailField");
+  var sendCcField = document.getElementById("sendCcField");
+  var sendBccField = document.getElementById("sendBccField");
+  var sendPhoneField = document.getElementById("sendPhoneField");
+  var toggleCcButton = document.getElementById("toggleCcButton");
+  var toggleBccButton = document.getElementById("toggleBccButton");
   var termsCheck = document.getElementById("termsCheck");
   var notesEditor = document.getElementById("notesEditor");
   var attachmentCheck = document.getElementById("attachmentCheck");
@@ -209,14 +221,106 @@
     notesEditor.focus();
   }
 
+  function openSendModal() {
+    if (!sendModalOverlay) return;
+    sendInvoiceName.value = templateName.textContent.trim() || "New Invoice";
+    updateSendModalFields();
+    sendModalOverlay.hidden = false;
+    document.body.classList.add("modal-open");
+  }
+
+  function closeSendModal() {
+    if (!sendModalOverlay) return;
+    sendModalOverlay.hidden = true;
+    document.body.classList.remove("modal-open");
+  }
+
+  function getSelectedSendMode() {
+    var checked = document.querySelector('input[name="sendAs"]:checked');
+    return checked ? checked.value : "email-text";
+  }
+
+  function setFieldVisibility(element, isVisible) {
+    if (!element) return;
+    element.classList.toggle("is-collapsed", !isVisible);
+  }
+
+  function setPillActive(button, isActive) {
+    if (!button) return;
+    button.classList.toggle("is-active", isActive);
+  }
+
+  function updateSendModalFields() {
+    var mode = getSelectedSendMode();
+    var showEmail = mode === "email" || mode === "email-text";
+    var showPhone = mode === "text" || mode === "email-text";
+
+    setFieldVisibility(sendEmailField, showEmail);
+    setFieldVisibility(sendPhoneField, showPhone);
+
+    if (!showEmail) {
+      setFieldVisibility(sendCcField, false);
+      setFieldVisibility(sendBccField, false);
+      setPillActive(toggleCcButton, false);
+      setPillActive(toggleBccButton, false);
+    }
+  }
+
   saveButton.addEventListener("click", function () {
     saveButton.querySelector("span").textContent = "Saved";
     setTimeout(function () { saveButton.querySelector("span").textContent = "Save"; }, 1500);
   });
 
   sendButton.addEventListener("click", function () {
-    sendButton.querySelector("span").textContent = "Sent";
-    setTimeout(function () { sendButton.querySelector("span").textContent = "Send"; }, 1500);
+    openSendModal();
+  });
+
+  if (sendModalClose) {
+    sendModalClose.addEventListener("click", closeSendModal);
+  }
+
+  if (sendModalCancel) {
+    sendModalCancel.addEventListener("click", closeSendModal);
+  }
+
+  if (sendModalSubmit) {
+    sendModalSubmit.addEventListener("click", function () {
+      closeSendModal();
+      sendButton.querySelector("span").textContent = "Sent";
+      setTimeout(function () { sendButton.querySelector("span").textContent = "Send"; }, 1500);
+    });
+  }
+
+  if (sendModalOverlay) {
+    sendModalOverlay.addEventListener("click", function (event) {
+      if (event.target === sendModalOverlay) closeSendModal();
+    });
+  }
+
+  sendAsRadios.forEach(function (radio) {
+    radio.addEventListener("change", updateSendModalFields);
+  });
+
+  if (toggleCcButton) {
+    toggleCcButton.addEventListener("click", function () {
+      var shouldShow = sendCcField.classList.contains("is-collapsed");
+      setFieldVisibility(sendCcField, shouldShow);
+      setPillActive(toggleCcButton, shouldShow);
+    });
+  }
+
+  if (toggleBccButton) {
+    toggleBccButton.addEventListener("click", function () {
+      var shouldShow = sendBccField.classList.contains("is-collapsed");
+      setFieldVisibility(sendBccField, shouldShow);
+      setPillActive(toggleBccButton, shouldShow);
+    });
+  }
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && sendModalOverlay && !sendModalOverlay.hidden) {
+      closeSendModal();
+    }
   });
 
   templateEditButton.addEventListener("click", function () {
