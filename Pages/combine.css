@@ -30,10 +30,6 @@
   color: #2f80ed;
 }
 
-.ep-demo .page-label {
-  margin-bottom: 12px;
-}
-
 .ep-demo .topbar-menu-dropdown {
   min-width: 220px;
 }
@@ -59,6 +55,28 @@
 
 .ep-demo .editor-toolbar {
   background: #F0F1F3;
+}
+
+/* Terms checkbox — center tick inside box + align with label */
+.ep-demo .check-line {
+  align-items: center;
+}
+
+.ep-demo .check-line input {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ep-demo .check-line input::after {
+  left: 50%;
+  top: 45%;
+  margin: 0;
+  transform: translate(-50%, -55%) rotate(45deg) scale(0);
+}
+
+.ep-demo .check-line input:checked::after {
+  transform: translate(-50%, -55%) rotate(45deg) scale(1);
 }
 
 /* Estimate Number steppers — exact image match */
@@ -92,5 +110,186 @@
 .ep-demo .mini-control.is-plus svg {
   color: #2f80ed;
   border-color: #e3eaf5;
+}
+
+/* ===== Tablet ===== */
+@media (max-width: 991.98px) {
+  .ep-demo {
+    padding: 12px 10px 32px;
+  }
+
+  .ep-demo .page-topbar {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .ep-demo .page-title-wrap {
+    order: 2;
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+
+  .ep-demo .topbar-actions {
+    margin-left: auto;
+  }
+
+  .ep-demo .preview-card {
+    min-height: auto;
+    margin-top: 12px;
+  }
+
+  .ep-demo .editor-panel {
+    border-right: 0;
+  }
+
+  .ep-demo .preview-meta-grid,
+  .ep-demo .preview-meta-grid-wide {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 767.98px) {
+  .ep-demo {
+    padding: 10px 8px 28px;
+  }
+
+  .ep-demo-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 6px;
+    padding-bottom: 4px;
+  }
+
+  .ep-demo-tab {
+    flex: 0 0 auto;
+    height: 34px;
+    padding: 0 12px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .ep-demo .invoice-page {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .ep-demo .page-topbar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px;
+  }
+
+  .ep-demo .back-link {
+    align-self: flex-start;
+  }
+
+  .ep-demo .page-title-wrap {
+    order: 0;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .ep-demo .page-title {
+    font-size: 18px;
+    width: auto;
+  }
+
+  .ep-demo .topbar-actions {
+    width: 100%;
+    margin-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ep-demo .topbar-menu {
+    order: 3;
+  }
+
+  .ep-demo .btn-save {
+    flex: 1 1 calc(50% - 8px);
+    min-width: 0;
+  }
+
+  .ep-demo .estimate-grid,
+  .ep-demo .preview-meta-grid,
+  .ep-demo .preview-meta-grid-wide,
+  .ep-demo .discount-controls {
+    grid-template-columns: 1fr;
+  }
+
+  .ep-demo .products-box {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .ep-demo .products-header,
+  .ep-demo .product-row {
+    min-width: 560px;
+  }
+
+  .ep-demo .inline-title-row {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ep-demo .switch-row {
+    width: 100%;
+  }
+
+  .ep-demo .font-select,
+  .ep-demo .type-select {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .ep-demo .tool-select.small-select {
+    min-width: 64px;
+  }
+
+  .ep-demo .editor-toolbar {
+    padding: 8px;
+  }
+
+  .ep-demo .toolbar-top,
+  .ep-demo .toolbar-main,
+  .ep-demo .toolbar-bottom {
+    gap: 6px;
+  }
+
+  .ep-demo .preview-totals {
+    max-width: 100%;
+  }
+
+  .ep-demo .topbar-menu-dropdown {
+    right: 0;
+    left: auto;
+    min-width: 200px;
+  }
+}
+
+/* ===== Small phones ===== */
+@media (max-width: 575.98px) {
+  .ep-demo .btn-save {
+    flex: 1 1 100%;
+  }
+
+  .ep-demo .topbar-menu {
+    width: 100%;
+  }
+
+  .ep-demo .topbar-menu-trigger {
+    width: 100%;
+  }
+
+  .ep-demo .card-heading h2 {
+    font-size: 15px;
+  }
+
+  .ep-demo .upload-inner {
+    padding: 16px 12px;
+  }
 }
 

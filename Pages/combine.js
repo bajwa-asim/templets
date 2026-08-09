@@ -1,6 +1,5 @@
 /* Estimate pages — status tab switcher (standalone demo) */
 (function () {
-  var label = document.getElementById("statusLabel");
   var menu = document.getElementById("topbarMenu");
   var trigger = document.getElementById("topbarMenuTrigger");
   var dropdown = document.getElementById("topbarMenuDropdown");
@@ -75,7 +74,6 @@
 
   function applyStatus(status) {
     var cfg = STATES[status] || STATES.draft;
-    label.textContent = cfg.label;
 
     saveBtn.hidden = !cfg.save.show;
     saveBtn.disabled = !!cfg.save.disabled;
