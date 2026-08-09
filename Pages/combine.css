@@ -30,7 +30,8 @@
   color: #2f80ed;
 }
 
-.ep-template-page .page-label {
+.ep-template-page .page-label,
+.ep-create-invoice .page-label {
   color: #b5b5b5;
   font-size: 13px;
   font-weight: 600;
@@ -38,7 +39,8 @@
   padding: 0 14px;
 }
 
-.ep-template-page.ep-demo {
+.ep-template-page.ep-demo,
+.ep-create-invoice.ep-demo {
   padding-top: 14px;
 }
 

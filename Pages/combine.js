@@ -170,4 +170,10 @@
   } else if (window.initEditorMenus) {
     window.initEditorMenus();
   }
+
+  /* Standalone Create Invoice page */
+  if (document.body.classList.contains("ep-create-invoice") && window.openInvoiceEditor) {
+    window.openInvoiceEditor(null, "create");
+    if (window.initEditorMenus) window.initEditorMenus();
+  }
 }());
