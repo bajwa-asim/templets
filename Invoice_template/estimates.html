@@ -114,7 +114,7 @@
       </a>
       <div class="page-title-wrap">
         <h1 class="page-title" id="templateName" contenteditable="true" spellcheck="false">Estimate Name</h1>
-        <button type="button" class="title-edit-btn" id="templateEditButton" aria-label="Edit template name">&#9998;</button>
+        <button type="button" class="title-edit-btn" id="templateEditButton" aria-label="Edit template name"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button>
       </div>
       <div class="topbar-actions">
         <div class="topbar-menu" id="topbarMenu" hidden>
@@ -128,17 +128,11 @@
           </div>
         </div>
         <button type="button" class="btn btn-save btn-ghost" id="saveButton">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M5 3.5h8l2.5 2.5v10a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"></path>
-            <path d="M7 3.5v4h5v-4M7.5 12.5h5"></path>
-          </svg>
+          <svg aria-hidden="true"><use href="#icon-save"></use></svg>
           <span>Save</span>
         </button>
         <button type="button" class="btn btn-save" id="sendButton">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M16.5 4.5 8.2 12.8"></path>
-            <path d="m16.5 4.5-5.4 10.8-1.7-5.1-5.1-1.7z"></path>
-          </svg>
+          <svg aria-hidden="true"><use href="#icon-send"></use></svg>
           <span>Send</span>
         </button>
       </div>
@@ -152,7 +146,7 @@
               <div class="card-heading">
                 <div class="card-title-row">
                   <h2>Business Information</h2>
-                  <button type="button" class="edit-toggle" id="businessEditToggle" aria-label="Edit business information">&#9998;</button>
+                  <button type="button" class="edit-toggle" id="businessEditToggle" aria-label="Edit business information"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button>
                 </div>
                 <button type="button" class="arrow-btn">&rsaquo;</button>
               </div>
@@ -217,7 +211,7 @@
                     <input type="text" id="invoiceNumber" class="form-control invoice-number-input" value="2">
                     <span class="number-actions">
                       <button type="button" class="mini-control" id="estimateMinus">-</button>
-                      <button type="button" class="mini-control" id="estimatePlus">+</button>
+                      <button type="button" class="mini-control is-plus" id="estimatePlus" aria-label="Increase"><svg aria-hidden="true"><use href="#icon-add-field"></use></svg></button>
                     </span>
                   </div>
                 </div>
@@ -225,14 +219,14 @@
                   <label for="issueDateInput">Invoice Issue Date</label>
                   <div class="input-icon-wrap">
                     <input type="date" id="issueDateInput" class="form-control" value="2026-08-04">
-                    <button type="button" class="date-trigger" data-target="issueDateInput" aria-label="Open issue date calendar">&#128197;</button>
+                    <button type="button" class="date-trigger" data-target="issueDateInput" aria-label="Open issue date calendar"><svg aria-hidden="true"><use href="#icon-calendar-alt"></use></svg></button>
                   </div>
                 </div>
                 <div class="form-group">
                   <label for="dueDateInput">Invoice Due Date</label>
                   <div class="input-icon-wrap">
                     <input type="date" id="dueDateInput" class="form-control" value="2026-08-18">
-                    <button type="button" class="date-trigger" data-target="dueDateInput" aria-label="Open due date calendar">&#128197;</button>
+                    <button type="button" class="date-trigger" data-target="dueDateInput" aria-label="Open due date calendar"><svg aria-hidden="true"><use href="#icon-calendar-alt"></use></svg></button>
                   </div>
                 </div>
               </div>
@@ -337,8 +331,8 @@
                   ></div>
                   <div class="editor-toolbar">
                     <div class="toolbar-top">
-                      <button type="button" class="tool-btn soft-btn" data-command="undo">&#8630;</button>
-                      <button type="button" class="tool-btn soft-btn" data-command="redo">&#8631;</button>
+                      <button type="button" class="tool-btn soft-btn" data-command="undo" aria-label="Undo"><svg aria-hidden="true"><use href="#icon-undo"></use></svg></button>
+                      <button type="button" class="tool-btn soft-btn" data-command="redo" aria-label="Redo"><svg aria-hidden="true"><use href="#icon-redo"></use></svg></button>
                       <select class="tool-select font-select" id="fontNameSelect">
                         <option>Inter</option>
                       </select>
@@ -360,33 +354,33 @@
                         <option value="2">2.0</option>
                       </select>
                       <div class="tool-group">
-                        <button type="button" class="tool-btn" data-command="bold"><strong>B</strong></button>
-                        <button type="button" class="tool-btn" data-command="italic"><em>I</em></button>
-                        <button type="button" class="tool-btn" data-command="underline"><u>U</u></button>
-                        <button type="button" class="tool-btn" data-command="strikeThrough">S</button>
+                        <button type="button" class="tool-btn" data-command="bold" aria-label="Bold"><svg aria-hidden="true"><use href="#icon-bold"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="italic" aria-label="Italic"><svg aria-hidden="true"><use href="#icon-italic"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="underline" aria-label="Underline"><svg aria-hidden="true"><use href="#icon-underline"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="strikeThrough" aria-label="Strikethrough"><svg aria-hidden="true"><use href="#icon-strikethrough"></use></svg></button>
                       </div>
                       <div class="tool-group">
-                        <button type="button" class="tool-btn accent-btn" data-command="foreColor" data-value="#d69e2e">A</button>
-                        <button type="button" class="tool-btn" data-command="removeFormat">&#9662;</button>
-                        <button type="button" class="tool-btn" data-command="bold"><strong>B</strong></button>
-                        <button type="button" class="tool-btn" data-command="italic"><em>I</em></button>
+                        <button type="button" class="tool-btn accent-btn" data-command="foreColor" data-value="#d69e2e" aria-label="Text color"><svg aria-hidden="true"><use href="#icon-text-color"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="removeFormat" aria-label="More">&#9662;</button>
+                        <button type="button" class="tool-btn" data-command="bold" aria-label="Bold"><svg aria-hidden="true"><use href="#icon-bold"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="italic" aria-label="Italic"><svg aria-hidden="true"><use href="#icon-italic"></use></svg></button>
                       </div>
                       <div class="tool-group">
-                        <button type="button" class="tool-btn" data-command="insertUnorderedList">&#9776;</button>
+                        <button type="button" class="tool-btn" data-command="insertUnorderedList" aria-label="Bullet list"><svg aria-hidden="true"><use href="#icon-list-bullet"></use></svg></button>
                         <button type="button" class="tool-btn" data-command="insertOrderedList">&#8783;</button>
                       </div>
                     </div>
                     <div class="toolbar-bottom">
                       <div class="tool-group">
-                        <button type="button" class="tool-btn" data-command="justifyLeft">&#9783;</button>
+                        <button type="button" class="tool-btn" data-command="justifyLeft" aria-label="Align left"><svg aria-hidden="true"><use href="#icon-align-left-lines"></use></svg></button>
                         <button type="button" class="tool-btn" data-command="justifyCenter">&#8801;</button>
                         <button type="button" class="tool-btn" data-command="justifyRight">&#8801;</button>
                         <button type="button" class="tool-btn" data-command="justifyFull">&#9776;</button>
                       </div>
                       <div class="tool-group">
                         <button type="button" class="tool-btn" data-command="outdent">&#8644;</button>
-                        <button type="button" class="tool-btn" data-action="link">&#128279;</button>
-                        <button type="button" class="tool-btn" id="imageInsertButton">&#128247;</button>
+                        <button type="button" class="tool-btn" data-action="link" aria-label="Insert link"><svg aria-hidden="true"><use href="#icon-link"></use></svg></button>
+                        <button type="button" class="tool-btn" id="imageInsertButton" aria-label="Insert image"><svg aria-hidden="true"><use href="#icon-image"></use></svg></button>
                       </div>
                     </div>
                   </div>
@@ -541,15 +535,10 @@
       </div>
       <div class="action-buttons">
         <button type="button" class="circle-btn add-row" aria-label="Add row">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <circle cx="10" cy="10" r="8"></circle>
-            <path d="M10 6v8M6 10h8"></path>
-          </svg>
+          <svg aria-hidden="true"><use href="#icon-add-field"></use></svg>
         </button>
         <button type="button" class="circle-btn remove-row" aria-label="Delete row">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M7 5.5h6M8 5.5V4.8c0-.5.4-.8.8-.8h2.4c.4 0 .8.3.8.8v.7M5.8 7h8.4M7.1 7l.5 7.1c0 .5.4.9.9.9h2.9c.5 0 .9-.4.9-.9L12.9 7M9 8.6v4.6M11 8.6v4.6"></path>
-          </svg>
+          <svg aria-hidden="true"><use href="#icon-trash"></use></svg>
         </button>
       </div>
     </div>
@@ -653,7 +642,7 @@
 
       <div class="send-modal-body">
         <div class="send-modal-field">
-          <label for="sendInvoiceName">Invoice Name <button type="button" class="field-edit-btn" aria-label="Edit invoice name">&#9998;</button></label>
+          <label for="sendInvoiceName">Invoice Name <button type="button" class="field-edit-btn" aria-label="Edit invoice name"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button></label>
           <input type="text" id="sendInvoiceName" class="form-control send-modal-input" placeholder="New Invoice">
         </div>
 
@@ -770,6 +759,7 @@
     </div>
   </div>
 
+  <script src="icons-sprite.js"></script>
   <script src="editor-menus.js"></script>
   <script src="estimates.js"></script>
 </body>

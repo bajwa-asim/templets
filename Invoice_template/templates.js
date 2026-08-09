@@ -254,10 +254,10 @@ window.TemplatesStore = (function () {
         '<td><a href="#" class="estimate-link" data-open-id="', item.id, '">', item.name, "</a></td>",
         amountCell,
         '<td><div class="estimate-actions">',
-        getActionButton("edit", "Edit", '<svg viewBox="0 0 24 24"><path d="M12 20h9"></path><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"></path></svg>'),
+        getActionButton("edit", "Edit", window.uiIcon ? window.uiIcon("icon-pen") : ""),
         getActionButton("view", "Send / View", '<svg viewBox="0 0 24 24"><path d="M2 12s3.6-6 10-6 10 6 10 6-3.6 6-10 6-10-6-10-6z"></path><circle cx="12" cy="12" r="2.8"></circle></svg>'),
         getActionButton("duplicate", "Duplicate", '<svg viewBox="0 0 24 24"><path d="M21 12a9 9 0 0 0-15.36-6.36"></path><path d="M3 4.5v5h5"></path><path d="M3 12a9 9 0 0 0 15.36 6.36"></path><path d="M21 19.5v-5h-5"></path></svg>'),
-        getActionButton("delete", "Delete", '<svg viewBox="0 0 24 24"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"></path><path d="M10 11v6M14 11v6"></path></svg>'),
+        getActionButton("delete", "Delete", window.uiIcon ? window.uiIcon("icon-trash") : ""),
         "</div></td>",
         "</tr>"
       ].join("");
@@ -279,13 +279,39 @@ window.TemplatesStore = (function () {
     setModal(deleteOverlay, false);
   }
 
-  function openTemplateInEditor(item, mode) {
-    if (!item) return;
-    if (item.type === "estimate") {
-      window.location.href = "estimates.html?templateId=" + item.id + (mode === "view" ? "&mode=view" : "");
-      return;
+  var viewList = document.getElementById("viewList");
+  var viewEditor = document.getElementById("viewEditor");
+
+  function showList() {
+    if (viewEditor) {
+      viewEditor.hidden = true;
+      viewEditor.innerHTML = "";
     }
-    window.location.href = "invoices.html?templateId=" + item.id + (mode === "view" ? "&mode=view" : "");
+    if (viewList) viewList.hidden = false;
+    templates = window.TemplatesStore.getAll();
+    renderTable();
+  }
+
+  function openTemplateInEditor(item) {
+    if (!item || !viewEditor) return;
+    var tplId = item.type === "estimate" ? "estimateEditorTpl" : "invoiceEditorTpl";
+    var tpl = document.getElementById(tplId);
+    if (!tpl) return;
+    if (viewList) viewList.hidden = true;
+    viewEditor.innerHTML = "";
+    viewEditor.appendChild(tpl.content.cloneNode(true));
+    viewEditor.hidden = false;
+    var opts = {
+      template: item,
+      type: item.type,
+      onBack: showList
+    };
+    if (item.type === "estimate") {
+      if (window.initEstimateTemplateEditor) window.initEstimateTemplateEditor(opts);
+    } else if (window.initInvoiceTemplateEditor) {
+      window.initInvoiceTemplateEditor(opts);
+    }
+    if (window.initEditorMenus) window.initEditorMenus();
   }
 
   document.querySelectorAll("#typeTabs .estimate-tab").forEach(function (tab) {
@@ -321,13 +347,9 @@ window.TemplatesStore = (function () {
 
   document.getElementById("createTemplateBtn").addEventListener("click", function (event) {
     event.preventDefault();
-    if (state.type === "invoice") {
-      window.location.href = "invoices.html?asTemplate=1";
-      return;
-    }
-    window.TemplatesStore.createBlank("estimate");
+    var item = window.TemplatesStore.createBlank(state.type);
     templates = window.TemplatesStore.getAll();
-    renderTable();
+    openTemplateInEditor(item, "edit");
   });
 
   tableBody.addEventListener("click", function (event) {

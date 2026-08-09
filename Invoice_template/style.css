@@ -142,59 +142,109 @@ body {
   white-space: nowrap;
 }
 
-.title-edit,
-.edit-link {
-  color: var(--blue);
-  font-size: 16px;
-}
-
-.title-edit-btn {
+.title-edit-btn,
+.edit-toggle,
+.field-edit-btn {
   border: 0;
   background: transparent;
   color: var(--blue);
   font-size: 15px;
   line-height: 1;
   padding: 0;
-}
-
-.edit-toggle {
-  border: 0;
-  background: transparent;
-  color: var(--blue);
-  font-size: 16px;
-  line-height: 1;
-  padding: 0;
-}
-
-.btn-save {
-  min-width: 78px;
-  border: 0;
-  border-radius: 7px;
-  background: var(--blue);
-  color: #fff;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 8px 15px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 7px;
+}
+
+.title-edit-btn svg,
+.edit-toggle svg,
+.field-edit-btn svg,
+.date-trigger svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: none;
+  color: inherit;
+}
+
+.date-trigger {
+  color: #667085;
+}
+
+.circle-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  display: block;
+  color: inherit;
+}
+
+.add-row,
+.mini-control.is-plus {
+  color: #12a150;
+}
+
+.add-row svg,
+.mini-control.is-plus svg {
+  color: #12a150;
+  stroke: currentColor;
+}
+
+.remove-row,
+.tool-btn.is-danger {
+  color: #ef4444;
+}
+
+.remove-row svg,
+.tool-btn.is-danger svg {
+  color: #ef4444;
+  stroke: currentColor;
+}
+
+.mini-control svg {
+  width: 14px;
+  height: 14px;
+  display: block;
+}
+
+.tool-btn svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+  fill: none;
+  color: inherit;
+}
+
+.btn-save {
+  min-width: 88px;
+  height: 40px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .btn-save svg {
-  width: 14px;
-  height: 14px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
   fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  color: inherit;
+  display: block;
 }
 
 .btn-ghost {
   background: #fff;
-  color: #344054;
-  border: 1px solid #d8deea;
+  color: #111827;
+  border: 1px solid #d1d5db;
 }
 
 .btn-save.is-disabled,
@@ -208,7 +258,7 @@ body {
 
 .btn-save.is-disabled svg,
 .btn-save:disabled svg {
-  stroke: currentColor;
+  color: currentColor;
 }
 
 .workspace {
@@ -417,6 +467,18 @@ body {
   font-size: 10px;
   line-height: 1;
   padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-control.is-plus {
+  color: #12a150;
+  border-color: #b7ebc9;
+}
+
+.mini-control.is-plus svg {
+  color: #12a150;
 }
 
 .estimate-grid {
@@ -749,17 +811,16 @@ body {
   width: 20px;
   height: 20px;
   fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 1.6;
+  display: block;
+  color: inherit;
 }
 
-.add-row svg {
-  stroke: #12a150;
+.circle-btn.add-row {
+  color: #12a150;
 }
 
-.remove-row svg {
-  stroke: #ff4b4b;
+.circle-btn.remove-row {
+  color: #ff4b4b;
 }
 
 .qty-input {
@@ -1168,6 +1229,14 @@ body {
 
 .accent-btn {
   color: #e8a117;
+}
+
+.tool-btn.is-danger {
+  color: #ff4b4b;
+}
+
+.tool-btn.is-danger svg {
+  color: #ff4b4b;
 }
 
 .tool-select {
@@ -2471,6 +2540,16 @@ body.modal-open {
 .estimate-action-btn svg {
   width: 18px;
   height: 18px;
+  display: block;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.estimate-action-btn svg use {
+  pointer-events: none;
 }
 
 .estimate-empty {
@@ -3099,6 +3178,16 @@ body.modal-open {
 .templates-list-page .estimate-table thead th:last-child,
 .templates-list-page .estimate-table tbody td:last-child {
   width: 140px;
+}
+
+.template-editor-frame,
+#viewEditor:not([hidden]) {
+  display: block;
+}
+
+#viewEditor {
+  min-height: 100vh;
+  background: #fff;
 }
 
 /* ===== Template picker modal (1024px — exact design match) ===== */

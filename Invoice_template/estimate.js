@@ -1,4 +1,6 @@
-(function () {
+window.initEstimateTemplateEditor = function (opts) {
+  opts = opts || {};
+  if (!document.getElementById("productRows")) return;
   var productRows = document.getElementById("productRows");
   var previewRows = document.getElementById("previewRows");
   var companyName = document.getElementById("companyName");
@@ -215,7 +217,63 @@
     });
   }
 
+  var activeTemplate = opts.template || null;
+
+  function applyTemplate(item) {
+    if (!item) return;
+    if (templateName) templateName.textContent = item.name || "Template Name";
+    companyName.value = item.companyName || "";
+    companyEmail.value = item.companyEmail || "";
+    companyPhone.value = item.companyPhone || "";
+    companyAddress.value = item.companyAddress || "";
+    invoiceNumber.value = item.invoiceNum || "";
+    productRows.innerHTML = "";
+    (item.products && item.products.length ? item.products : [{ name: "Enter item name", price: 0, qty: 0, tax: 0 }]).forEach(function (p) {
+      addRow(p);
+    });
+    if (notesEditor) notesEditor.innerHTML = item.notes || "";
+    updateInvoice();
+  }
+
+  function collectTemplateData() {
+    var rows = getRows();
+    return {
+      name: ((templateName && templateName.textContent) || "").trim() || "Template Name",
+      companyName: companyName.value,
+      companyEmail: companyEmail.value,
+      companyPhone: companyPhone.value,
+      companyAddress: companyAddress.value,
+      invoiceNum: invoiceNumber.value,
+      products: rows.map(function (row) {
+        return { name: row.name, price: row.price, qty: row.qty, tax: row.tax };
+      }),
+      amount: window.TemplatesStore ? window.TemplatesStore.amountOf(rows) : 0,
+      notes: notesEditor ? notesEditor.innerHTML : ""
+    };
+  }
+
+  function goBackToTemplates() {
+    if (typeof opts.onBack === "function") {
+      opts.onBack();
+      return;
+    }
+    window.location.href = "templates.html";
+  }
+
+  var backLink = document.querySelector(".back-link");
+  if (backLink) {
+    backLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      goBackToTemplates();
+    });
+  }
+
   saveButton.addEventListener("click", function () {
+    if (activeTemplate && window.TemplatesStore) {
+      Object.assign(activeTemplate, collectTemplateData());
+      activeTemplate.type = opts.type || "estimate";
+      window.TemplatesStore.upsert(activeTemplate);
+    }
     saveButton.querySelector("span").textContent = "Saved";
     setTimeout(function () {
       saveButton.querySelector("span").textContent = "Save";
@@ -312,5 +370,10 @@
   addRow({ name: "Enter item name", price: 0, qty: 0, tax: 0 });
   notesEditor.innerHTML = "";
   notesEditor.style.lineHeight = lineHeightSelect.value;
-  updateInvoice();
-}());
+  if (activeTemplate) applyTemplate(activeTemplate);
+  else updateInvoice();
+};
+
+if (!document.getElementById("templatesTableBody")) {
+  window.initEstimateTemplateEditor({});
+}

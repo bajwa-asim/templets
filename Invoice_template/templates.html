@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div id="viewList">
   <div class="estimate-list-page templates-list-page">
     <main class="estimate-shell">
       <section class="estimate-intro">
@@ -70,6 +71,738 @@
       </section>
     </main>
   </div>
+  </div>
+
+  <div id="viewEditor" hidden></div>
+
+  <template id="invoiceEditorTpl">
+<div class="invoice-page">
+    <div class="page-topbar">
+      <a href="#" class="back-link">
+        <span class="icon">&larr;</span>
+        <span>Back</span>
+      </a>
+      <div class="page-title-wrap">
+        <h1 class="page-title" id="templateName" contenteditable="true" spellcheck="false">Template Name</h1>
+        <button type="button" class="title-edit-btn" id="templateEditButton" aria-label="Edit template name"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button>
+      </div>
+      <button type="button" class="btn btn-save" id="saveButton">
+        <svg aria-hidden="true"><use href="#icon-save"></use></svg>
+        <span>Save</span>
+      </button>
+    </div>
+
+    <div class="workspace">
+      <div class="row no-gutters">
+        <div class="col-xl-6 col-lg-7">
+          <div class="editor-panel">
+            <div class="panel-card gateway-card" id="gatewayCard">
+              <div class="gateway-head">
+                <div class="gateway-message">
+                  <span class="info-dot">i</span>
+                  Connect at least one payment gateway to start receiving payments
+                </div>
+                <button type="button" class="card-close" id="closeGateway">&times;</button>
+              </div>
+              <button type="button" class="btn btn-light gateway-btn">Integrate Payment Gateway</button>
+            </div>
+
+            <div class="panel-card">
+              <div class="card-heading">
+                <div class="card-title-row">
+                  <h2>Business Information</h2>
+                  <button type="button" class="edit-toggle" id="businessEditToggle" aria-label="Edit business information"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button>
+                </div>
+                <button type="button" class="arrow-btn">&rsaquo;</button>
+              </div>
+              <div class="info-list">
+                <div class="info-line"><strong>Company Name:</strong> <span id="companyPreview">ABC 3</span></div>
+                <div class="info-line"><strong>Email:</strong> <span id="emailPreview">riley.bennett@corporate.net</span></div>
+                <div class="info-line"><strong>Phone:</strong> <span id="phonePreview">+13141236547</span></div>
+                <div class="info-line"><strong>Address:</strong> <span id="addressPreview">Oxford Street United Kingdom</span></div>
+              </div>
+
+              <div class="edit-grid">
+                <div class="form-group">
+                  <label for="companyName">Company Name</label>
+                  <input type="text" class="form-control" id="companyName" value="ABC 3">
+                </div>
+                <div class="form-group">
+                  <label for="companyEmail">Email</label>
+                  <input type="email" class="form-control" id="companyEmail" value="riley.bennett@corporate.net">
+                </div>
+                <div class="form-group">
+                  <label for="companyPhone">Phone</label>
+                  <input type="text" class="form-control" id="companyPhone" value="+13141236547">
+                </div>
+                <div class="form-group">
+                  <label for="companyAddress">Address</label>
+                  <input type="text" class="form-control" id="companyAddress" value="Oxford Street United Kingdom">
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="card-heading">
+                <h2>We need option for invoice</h2>
+                <button type="button" class="arrow-btn">&rsaquo;</button>
+              </div>
+              <div class="form-group mb-0">
+                <label for="invoiceNumber">Invoice Number</label>
+                <div class="invoice-number-box">
+                  <span class="prefix-box">INV-</span>
+                  <input type="text" id="invoiceNumber" class="form-control invoice-number-input" value="2">
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="card-heading add-product-heading">
+                <div>
+                  <h2>Add Product</h2>
+                  <p>Choose products from your catalogue or add new products to this invoice</p>
+                </div>
+                <button type="button" class="arrow-btn">&rsaquo;</button>
+              </div>
+
+              <div class="products-box">
+                <div class="products-header">
+                  <div>Item</div>
+                  <div>Price</div>
+                  <div>Quantity</div>
+                  <div>Tax</div>
+                  <div>Action</div>
+                </div>
+                <div id="productRows"></div>
+              </div>
+            </div>
+
+            <div class="totals-card">
+              <div class="total-line">
+                <span>Subtotal</span>
+                <strong id="subtotalOutput">$0.00</strong>
+              </div>
+
+              <div class="discount-block">
+                <div class="discount-head">Add Discount</div>
+                <div class="discount-controls">
+                  <div class="discount-options">
+                    <label class="radio-line">
+                      <input type="radio" name="discountMode" value="percent" checked>
+                      <span>Percentage</span>
+                    </label>
+                    <label class="radio-line">
+                      <input type="radio" name="discountMode" value="amount">
+                      <span>Custom Amount</span>
+                    </label>
+                  </div>
+                  <div class="mini-input">
+                    <span class="mini-prefix" id="discountPrefix">%</span>
+                    <input type="number" id="discountValue" value="0" min="0" step="0.01">
+                  </div>
+                </div>
+              </div>
+
+              <div class="tax-block">
+                <div class="discount-head">Add Tax</div>
+                <div class="tax-input-wrap">
+                  <div class="mini-input">
+                    <span class="mini-prefix">%</span>
+                    <input type="number" id="taxValue" value="0" min="0" step="0.01">
+                  </div>
+                </div>
+              </div>
+
+              <div class="amount-due-line">
+                <span>Amount Due</span>
+                <strong id="amountDueOutput">$0.00</strong>
+              </div>
+            </div>
+
+            <div class="panel-card additional-card">
+              <div class="card-heading add-product-heading">
+                <div>
+                  <h2>Additional Options</h2>
+                  <p>Add terms and notes to your invoice</p>
+                </div>
+                <button type="button" class="arrow-btn">&rsaquo;</button>
+              </div>
+
+              <div class="option-divider"></div>
+
+              <label class="check-line disabled-line">
+                <input type="checkbox" disabled>
+                <span>Charges Processing Fees</span>
+              </label>
+
+              <label class="check-line">
+                <input type="checkbox" id="termsCheck" checked>
+                <span>Terms and Conditions</span>
+              </label>
+
+              <div class="notes-block">
+                <label for="notesArea">Add Notes / Terms</label>
+                <div class="editor-wrap">
+                  <div
+                    id="notesEditor"
+                    class="notes-editor"
+                    contenteditable="true"
+                    data-placeholder="Write something here ..."
+                  ></div>
+                  <div class="editor-toolbar">
+                    <div class="toolbar-top">
+                      <button type="button" class="tool-btn soft-btn" data-command="undo" aria-label="Undo"><svg aria-hidden="true"><use href="#icon-undo"></use></svg></button>
+                      <button type="button" class="tool-btn soft-btn" data-command="redo" aria-label="Redo"><svg aria-hidden="true"><use href="#icon-redo"></use></svg></button>
+                      <select class="tool-select font-select" id="fontNameSelect">
+                        <option>Inter</option>
+                      </select>
+                      <select class="tool-select type-select" id="formatBlockSelect">
+                        <option value="P">Paragraph</option>
+                        <option value="H1">Heading 1</option>
+                        <option value="H2">Heading 2</option>
+                      </select>
+                    </div>
+                    <div class="toolbar-main">
+                      <select class="tool-select small-select" id="fontSizeSelect">
+                        <option value="2">10</option>
+                        <option value="3" selected>12</option>
+                        <option value="4">14</option>
+                      </select>
+                      <select class="tool-select small-select" id="lineHeightSelect">
+                        <option value="1">1.0</option>
+                        <option value="1.5" selected>1.5</option>
+                        <option value="2">2.0</option>
+                      </select>
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn" data-command="bold" aria-label="Bold"><svg aria-hidden="true"><use href="#icon-bold"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="italic" aria-label="Italic"><svg aria-hidden="true"><use href="#icon-italic"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="underline" aria-label="Underline"><svg aria-hidden="true"><use href="#icon-underline"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="strikeThrough" aria-label="Strikethrough"><svg aria-hidden="true"><use href="#icon-strikethrough"></use></svg></button>
+                      </div>
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn accent-btn" data-command="foreColor" data-value="#d69e2e" aria-label="Text color"><svg aria-hidden="true"><use href="#icon-text-color"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="removeFormat" aria-label="More">&#9662;</button>
+                        <button type="button" class="tool-btn" data-command="bold" aria-label="Bold"><svg aria-hidden="true"><use href="#icon-bold"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="italic" aria-label="Italic"><svg aria-hidden="true"><use href="#icon-italic"></use></svg></button>
+                      </div>
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn" data-command="insertUnorderedList" aria-label="Bullet list"><svg aria-hidden="true"><use href="#icon-list-bullet"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="insertOrderedList">&#8783;</button>
+                      </div>
+                    </div>
+                    <div class="toolbar-bottom">
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn" data-command="justifyLeft" aria-label="Align left"><svg aria-hidden="true"><use href="#icon-align-left-lines"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="justifyCenter">&#8801;</button>
+                        <button type="button" class="tool-btn" data-command="justifyRight">&#8801;</button>
+                        <button type="button" class="tool-btn" data-command="justifyFull">&#9776;</button>
+                      </div>
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn" data-command="outdent">&#8644;</button>
+                        <button type="button" class="tool-btn" data-action="link" aria-label="Insert link"><svg aria-hidden="true"><use href="#icon-link"></use></svg></button>
+                        <button type="button" class="tool-btn" id="imageInsertButton" aria-label="Insert image"><svg aria-hidden="true"><use href="#icon-image"></use></svg></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <label class="check-line attachment-toggle">
+                <input type="checkbox" id="attachmentCheck" checked>
+                <span>Add Attachment</span>
+              </label>
+
+              <div class="upload-panel" id="uploadPanel">
+                <div class="upload-inner">
+                  <div class="upload-icon">&#8682;</div>
+                  <label for="attachmentInput" class="upload-link">Click to upload</label>
+                  <div class="upload-types">PDF, CSV, PNG</div>
+                  <div class="upload-note">Maximum of 10 files, not exceeding 20 Mb, can be attached</div>
+                  <input type="file" id="attachmentInput" multiple hidden>
+                  <input type="file" id="editorImageInput" accept="image/*" hidden>
+                </div>
+                <div class="upload-files" id="uploadFiles"></div>
+                <div class="upload-preview-grid" id="uploadPreviewGrid"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-5">
+          <div class="preview-panel">
+            <div class="preview-card">
+              <div class="preview-head">
+                <h3>Invoice</h3>
+              </div>
+
+              <div class="company-meta" id="previewCompanyMeta">
+                ABC 3<br>
+                +13141236547<br>
+                Oxford Street<br>
+                United Kingdom
+              </div>
+
+              <div class="preview-meta-grid">
+                <div>
+                  <h4>Billed To</h4>
+                  <p id="previewBilledTo">John's Company<br>John Doe 1234 Main Street Austin, Texas 54321 US</p>
+                </div>
+                <div>
+                  <h4>Invoice Number</h4>
+                  <p id="previewInvoiceNumber">INV-2</p>
+                </div>
+                <div>
+                  <h4>Issue Date</h4>
+                  <p id="previewIssueDate">August 4, 2026</p>
+                  <h4 class="due-date-label">Due Date</h4>
+                  <p id="previewDueDate">August 18, 2026</p>
+                </div>
+                <div class="pay-box-wrap">
+                  <div class="pay-badge" id="payBadge">Pay $20.00</div>
+                </div>
+              </div>
+
+              <div class="preview-table-wrap">
+                <table class="table preview-table mb-0">
+                  <thead>
+                    <tr>
+                      <th>Item Name</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Tax</th>
+                      <th class="text-right">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody id="previewRows"></tbody>
+                </table>
+              </div>
+
+              <div class="preview-totals">
+                <div class="preview-total-line">
+                  <span>Subtotal</span>
+                  <strong id="previewSubtotal">$0.00</strong>
+                </div>
+                <div class="preview-total-line">
+                  <span>Tax</span>
+                  <strong id="previewTax">$0.00</strong>
+                </div>
+                <div class="preview-total-line total-due">
+                  <span>Amount Due (GBP)</span>
+                  <strong id="previewAmountDue">$0.00</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="productRowTemplate">
+    <div class="product-row">
+      <div class="product-field">
+        <input type="text" class="form-control item-name" placeholder="Select product">
+        <button type="button" class="description-link">Add Description</button>
+      </div>
+      <div>
+        <div class="money-input">
+          <span>$</span>
+          <input type="number" class="form-control item-price" value="0" min="0" step="0.01">
+        </div>
+      </div>
+      <div>
+        <div class="qty-box">
+          <input type="number" class="form-control item-qty qty-input" value="0" min="0" step="1">
+          <div class="qty-arrows">
+            <button type="button" class="qty-arrow qty-up" aria-label="Increase quantity">
+              <svg viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M2.2 7.6 6 3.8l3.8 3.8"></path>
+              </svg>
+            </button>
+            <button type="button" class="qty-arrow qty-down" aria-label="Decrease quantity">
+              <svg viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M2.2 4.4 6 8.2l3.8-3.8"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="money-input">
+          <span>%</span>
+          <input type="number" class="form-control item-tax" value="0" min="0" step="0.01">
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button type="button" class="circle-btn add-row" aria-label="Add row">
+          <svg aria-hidden="true"><use href="#icon-add-field"></use></svg>
+        </button>
+        <button type="button" class="circle-btn remove-row" aria-label="Delete row">
+          <svg aria-hidden="true"><use href="#icon-trash"></use></svg>
+        </button>
+      </div>
+    </div>
+  </template>
+  </template>
+
+  <template id="estimateEditorTpl">
+<div class="invoice-page">
+    <div class="page-topbar">
+      <a href="#" class="back-link">
+        <span class="icon">&larr;</span>
+        <span>Back</span>
+      </a>
+      <div class="page-title-wrap">
+        <h1 class="page-title" id="templateName" contenteditable="true" spellcheck="false">Template Name</h1>
+        <button type="button" class="title-edit-btn" id="templateEditButton" aria-label="Edit template name"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button>
+      </div>
+      <button type="button" class="btn btn-save" id="saveButton">
+        <svg aria-hidden="true"><use href="#icon-save"></use></svg>
+        <span>Save</span>
+      </button>
+    </div>
+
+    <div class="workspace">
+      <div class="row no-gutters">
+        <div class="col-xl-6 col-lg-7">
+          <div class="editor-panel">
+            <div class="panel-card">
+              <div class="card-heading">
+                <div class="card-title-row">
+                  <h2>Business Information</h2>
+                  <button type="button" class="edit-toggle" id="businessEditToggle" aria-label="Edit business information"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button>
+                </div>
+                <button type="button" class="arrow-btn">&rsaquo;</button>
+              </div>
+              <div class="info-list">
+                <div class="info-line"><strong>Company Name:</strong> <span id="companyPreview">ABC 3</span></div>
+                <div class="info-line"><strong>Email:</strong> <span id="emailPreview">riley.bennett@corporate.net</span></div>
+                <div class="info-line"><strong>Phone:</strong> <span id="phonePreview">+13141236547</span></div>
+                <div class="info-line"><strong>Address:</strong> <span id="addressPreview">Oxford Street United Kingdom</span></div>
+              </div>
+
+              <div class="edit-grid">
+                <div class="form-group">
+                  <label for="companyName">Company Name</label>
+                  <input type="text" class="form-control" id="companyName" value="ABC 3">
+                </div>
+                <div class="form-group">
+                  <label for="companyEmail">Email</label>
+                  <input type="email" class="form-control" id="companyEmail" value="riley.bennett@corporate.net">
+                </div>
+                <div class="form-group">
+                  <label for="companyPhone">Phone</label>
+                  <input type="text" class="form-control" id="companyPhone" value="+13141236547">
+                </div>
+                <div class="form-group">
+                  <label for="companyAddress">Address</label>
+                  <input type="text" class="form-control" id="companyAddress" value="Oxford Street United Kingdom">
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="card-heading">
+                <h2>We need option for estimate</h2>
+                <button type="button" class="arrow-btn">&rsaquo;</button>
+              </div>
+              <div class="form-group mb-0">
+                <label for="invoiceNumber">Estimate Number</label>
+                <div class="invoice-number-box">
+                  <span class="prefix-box">EST-</span>
+                  <input type="text" id="invoiceNumber" class="form-control invoice-number-input" value="2">
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-card">
+              <div class="card-heading add-product-heading">
+                <div>
+                  <h2>Add Product</h2>
+                  <p>Choose products from your catalogue or add new products to this invoice</p>
+                </div>
+                <button type="button" class="arrow-btn">&rsaquo;</button>
+              </div>
+
+              <div class="products-box">
+                <div class="products-header">
+                  <div>Item</div>
+                  <div>Price</div>
+                  <div>Quantity</div>
+                  <div>Tax</div>
+                  <div>Action</div>
+                </div>
+                <div id="productRows"></div>
+              </div>
+            </div>
+
+            <div class="totals-card">
+              <div class="total-line">
+                <span>Subtotal</span>
+                <strong id="subtotalOutput">$0.00</strong>
+              </div>
+
+              <div class="discount-block">
+                <div class="discount-head">Add Discount</div>
+                <div class="discount-controls">
+                  <div class="discount-options">
+                    <label class="radio-line">
+                      <input type="radio" name="discountMode" value="percent" checked>
+                      <span>Percentage</span>
+                    </label>
+                    <label class="radio-line">
+                      <input type="radio" name="discountMode" value="amount">
+                      <span>Custom Amount</span>
+                    </label>
+                  </div>
+                  <div class="mini-input">
+                    <span class="mini-prefix" id="discountPrefix">%</span>
+                    <input type="number" id="discountValue" value="0" min="0" step="0.01">
+                  </div>
+                </div>
+              </div>
+
+              <div class="tax-block">
+                <div class="discount-head">Add Tax</div>
+                <div class="tax-input-wrap">
+                  <div class="mini-input">
+                    <span class="mini-prefix">%</span>
+                    <input type="number" id="taxValue" value="0" min="0" step="0.01">
+                  </div>
+                </div>
+              </div>
+
+              <div class="amount-due-line">
+                <span>Amount Due</span>
+                <strong id="amountDueOutput">$0.00</strong>
+              </div>
+            </div>
+
+            <div class="panel-card additional-card">
+              <div class="card-heading add-product-heading">
+                <div>
+                  <h2>Additional Options</h2>
+                  <p>Add terms and notes to your invoice</p>
+                </div>
+                <button type="button" class="arrow-btn">&rsaquo;</button>
+              </div>
+
+              <div class="option-divider"></div>
+
+              <label class="check-line disabled-line">
+                <input type="checkbox" disabled>
+                <span>Charges Processing Fees</span>
+              </label>
+
+              <label class="check-line">
+                <input type="checkbox" id="termsCheck" checked>
+                <span>Terms and Conditions</span>
+              </label>
+
+              <div class="notes-block">
+                <label for="notesArea">Add Notes / Terms</label>
+                <div class="editor-wrap">
+                  <div
+                    id="notesEditor"
+                    class="notes-editor"
+                    contenteditable="true"
+                    data-placeholder="Write something here ..."
+                  ></div>
+                  <div class="editor-toolbar">
+                    <div class="toolbar-top">
+                      <button type="button" class="tool-btn soft-btn" data-command="undo" aria-label="Undo"><svg aria-hidden="true"><use href="#icon-undo"></use></svg></button>
+                      <button type="button" class="tool-btn soft-btn" data-command="redo" aria-label="Redo"><svg aria-hidden="true"><use href="#icon-redo"></use></svg></button>
+                      <select class="tool-select font-select" id="fontNameSelect">
+                        <option>Inter</option>
+                      </select>
+                      <select class="tool-select type-select" id="formatBlockSelect">
+                        <option value="P">Paragraph</option>
+                        <option value="H1">Heading 1</option>
+                        <option value="H2">Heading 2</option>
+                      </select>
+                    </div>
+                    <div class="toolbar-main">
+                      <select class="tool-select small-select" id="fontSizeSelect">
+                        <option value="2">10</option>
+                        <option value="3" selected>12</option>
+                        <option value="4">14</option>
+                      </select>
+                      <select class="tool-select small-select" id="lineHeightSelect">
+                        <option value="1">1.0</option>
+                        <option value="1.5" selected>1.5</option>
+                        <option value="2">2.0</option>
+                      </select>
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn" data-command="bold" aria-label="Bold"><svg aria-hidden="true"><use href="#icon-bold"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="italic" aria-label="Italic"><svg aria-hidden="true"><use href="#icon-italic"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="underline" aria-label="Underline"><svg aria-hidden="true"><use href="#icon-underline"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="strikeThrough" aria-label="Strikethrough"><svg aria-hidden="true"><use href="#icon-strikethrough"></use></svg></button>
+                      </div>
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn accent-btn" data-command="foreColor" data-value="#d69e2e" aria-label="Text color"><svg aria-hidden="true"><use href="#icon-text-color"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="removeFormat" aria-label="More">&#9662;</button>
+                        <button type="button" class="tool-btn" data-command="bold" aria-label="Bold"><svg aria-hidden="true"><use href="#icon-bold"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="italic" aria-label="Italic"><svg aria-hidden="true"><use href="#icon-italic"></use></svg></button>
+                      </div>
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn" data-command="insertUnorderedList" aria-label="Bullet list"><svg aria-hidden="true"><use href="#icon-list-bullet"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="insertOrderedList">&#8783;</button>
+                      </div>
+                    </div>
+                    <div class="toolbar-bottom">
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn" data-command="justifyLeft" aria-label="Align left"><svg aria-hidden="true"><use href="#icon-align-left-lines"></use></svg></button>
+                        <button type="button" class="tool-btn" data-command="justifyCenter">&#8801;</button>
+                        <button type="button" class="tool-btn" data-command="justifyRight">&#8801;</button>
+                        <button type="button" class="tool-btn" data-command="justifyFull">&#9776;</button>
+                      </div>
+                      <div class="tool-group">
+                        <button type="button" class="tool-btn" data-command="outdent">&#8644;</button>
+                        <button type="button" class="tool-btn" data-action="link" aria-label="Insert link"><svg aria-hidden="true"><use href="#icon-link"></use></svg></button>
+                        <button type="button" class="tool-btn" id="imageInsertButton" aria-label="Insert image"><svg aria-hidden="true"><use href="#icon-image"></use></svg></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <label class="check-line attachment-toggle">
+                <input type="checkbox" id="attachmentCheck" checked>
+                <span>Add Attachment</span>
+              </label>
+
+              <div class="upload-panel" id="uploadPanel">
+                <div class="upload-inner">
+                  <div class="upload-icon">&#8682;</div>
+                  <label for="attachmentInput" class="upload-link">Click to upload</label>
+                  <div class="upload-types">PDF, CSV, PNG</div>
+                  <div class="upload-note">Maximum of 10 files, not exceeding 20 Mb, can be attached</div>
+                  <input type="file" id="attachmentInput" multiple hidden>
+                  <input type="file" id="editorImageInput" accept="image/*" hidden>
+                </div>
+                <div class="upload-files" id="uploadFiles"></div>
+                <div class="upload-preview-grid" id="uploadPreviewGrid"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-6 col-lg-5">
+          <div class="preview-panel">
+            <div class="preview-card">
+              <div class="preview-head">
+                <h3>Invoice</h3>
+              </div>
+
+              <div class="company-meta" id="previewCompanyMeta">
+                ABC 3<br>
+                +92447475763830<br>
+                Oxford Street<br>
+                London, Greater London<br>
+                W1C 1JT<br>
+                GB
+              </div>
+
+              <div class="preview-meta-grid">
+                <div>
+                  <h4>Billed To</h4>
+                  <p id="previewBilledTo">John's Company<br>John Doe 1234 Main Street Austin, Texas 54321 US</p>
+                </div>
+                <div>
+                  <h4>Invoice Number</h4>
+                  <p id="previewInvoiceNumber">INV-000004</p>
+                </div>
+                <div>
+                  <h4>Issue Date</h4>
+                  <p id="previewIssueDate">August 4, 2026</p>
+                  <h4 class="due-date-label">Due Date</h4>
+                  <p id="previewDueDate">August 18, 2026</p>
+                </div>
+                <div class="pay-box-wrap"></div>
+              </div>
+
+              <div class="preview-table-wrap">
+                <table class="table preview-table mb-0">
+                  <thead>
+                    <tr>
+                      <th>Item Name</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Tax</th>
+                      <th class="text-right">Subtotal</th>
+                    </tr>
+                  </thead>
+                  <tbody id="previewRows"></tbody>
+                </table>
+              </div>
+
+              <div class="preview-totals">
+                <div class="preview-total-line">
+                  <span>Subtotal</span>
+                  <strong id="previewSubtotal">$60.00</strong>
+                </div>
+                <div class="preview-total-line">
+                  <span>Tax</span>
+                  <strong id="previewTax">$60.00</strong>
+                </div>
+                <div class="preview-total-line total-due">
+                  <span>Amount Due (GBP)</span>
+                  <strong id="previewAmountDue">$60.00</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <template id="productRowTemplate">
+    <div class="product-row">
+      <div class="product-field">
+        <input type="text" class="form-control item-name" placeholder="Select product">
+        <button type="button" class="description-link">Add Description</button>
+      </div>
+      <div>
+        <div class="money-input">
+          <span>$</span>
+          <input type="number" class="form-control item-price" value="0" min="0" step="0.01">
+        </div>
+      </div>
+      <div>
+        <div class="qty-box">
+          <input type="number" class="form-control item-qty qty-input" value="0" min="0" step="1">
+          <div class="qty-arrows">
+            <button type="button" class="qty-arrow qty-up" aria-label="Increase quantity">
+              <svg viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M2.2 7.6 6 3.8l3.8 3.8"></path>
+              </svg>
+            </button>
+            <button type="button" class="qty-arrow qty-down" aria-label="Decrease quantity">
+              <svg viewBox="0 0 12 12" aria-hidden="true">
+                <path d="M2.2 4.4 6 8.2l3.8-3.8"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="money-input">
+          <span>%</span>
+          <input type="number" class="form-control item-tax" value="0" min="0" step="0.01">
+        </div>
+      </div>
+      <div class="action-buttons">
+        <button type="button" class="circle-btn add-row" aria-label="Add row">
+          <svg aria-hidden="true"><use href="#icon-add-field"></use></svg>
+        </button>
+        <button type="button" class="circle-btn remove-row" aria-label="Delete row">
+          <svg aria-hidden="true"><use href="#icon-trash"></use></svg>
+        </button>
+      </div>
+    </div>
+  </template>
+  </template>
 
   <div class="ep-modal-overlay" id="deleteModalOverlay" hidden>
     <div class="ep-modal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
@@ -77,7 +810,7 @@
         <div class="ep-modal-title-wrap">
           <span class="ep-modal-icon ep-modal-icon-danger" aria-hidden="true">
             <svg viewBox="0 0 20 20" fill="none">
-              <path d="M4 6h12M8 6V4.8c0-.4.4-.8.8-.8h2.4c.4 0 .8.4.8.8V6M15.2 6l-.7 10.2a1 1 0 0 1-1 .8H6.5a1 1 0 0 1-1-.8L4.8 6M8.5 9.2v5M11.5 9.2v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M4 6h12M8 6V4.8c0-.4.4-.8.8-.8h2.4c.4 0 .8.4.8.8V6M15.2 6l-.7 10.2a1 1 0 0 1-1-.8H6.5a1 1 0 0 1-1-.8L4.8 6M8.5 9.2v5M11.5 9.2v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
           </span>
           <h2 id="deleteModalTitle">Delete Template</h2>
@@ -92,6 +825,10 @@
     </div>
   </div>
 
+  <script src="icons-sprite.js"></script>
+  <script src="editor-menus.js"></script>
+  <script src="script.js"></script>
+  <script src="estimate.js"></script>
   <script src="templates.js"></script>
 </body>
 </html>

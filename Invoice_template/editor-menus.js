@@ -172,6 +172,8 @@
     upgradeFontSizeHandlers();
   }
 
+  window.initEditorMenus = init;
+
   document.addEventListener("click", function () { closeAll(); });
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") closeAll();
