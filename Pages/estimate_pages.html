@@ -388,7 +388,93 @@
     </div>
   </div>
 
-  <script src="../Invoice_template/icons-sprite.js"></script>
+  <div class="send-modal-overlay" id="sendModalOverlay" hidden>
+    <div class="send-modal" role="dialog" aria-modal="true" aria-labelledby="sendModalTitle">
+      <div class="send-modal-header">
+        <h2 id="sendModalTitle">Send Invoice</h2>
+        <button type="button" class="send-modal-close" id="sendModalClose" aria-label="Close send dialog">&times;</button>
+      </div>
+
+      <div class="send-modal-body">
+        <div class="send-modal-field">
+          <label for="sendInvoiceName">Invoice Name <button type="button" class="field-edit-btn" aria-label="Edit invoice name"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button></label>
+          <input type="text" id="sendInvoiceName" class="form-control send-modal-input" placeholder="New Invoice">
+        </div>
+
+        <div class="send-modal-field">
+          <span class="send-modal-label">Send as</span>
+          <div class="send-options">
+            <label class="send-option">
+              <input type="radio" name="sendAs" value="email-text" checked>
+              <span>Email &amp; Text</span>
+            </label>
+            <label class="send-option">
+              <input type="radio" name="sendAs" value="email">
+              <span>Email</span>
+            </label>
+            <label class="send-option">
+              <input type="radio" name="sendAs" value="text">
+              <span>Text</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="send-modal-field" id="sendEmailField">
+          <div class="recipient-row">
+            <div class="recipient-inline-group">
+              <label for="sendRecipientSelect">Email</label>
+              <div class="recipient-select-wrap">
+                <div class="recipient-avatar">RB</div>
+                <select id="sendRecipientSelect" class="form-control recipient-select">
+                  <option selected>riley.bennett@corporate.net</option>
+                  <option>billing@abc3.com</option>
+                </select>
+              </div>
+            </div>
+            <div class="recipient-actions">
+              <button type="button" class="recipient-pill" id="toggleCcButton">CC</button>
+              <button type="button" class="recipient-pill" id="toggleBccButton">BCC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="send-modal-field is-collapsed" id="sendCcField">
+          <label for="sendCc">CC</label>
+          <input type="text" id="sendCc" class="form-control send-line-input">
+        </div>
+
+        <div class="send-modal-field is-collapsed" id="sendBccField">
+          <label for="sendBcc">BCC</label>
+          <input type="text" id="sendBcc" class="form-control send-line-input">
+        </div>
+
+        <div class="send-modal-field phone-field" id="sendPhoneField">
+          <span class="send-modal-label">Phone <strong>+13141236547</strong></span>
+        </div>
+
+        <div class="send-modal-field">
+          <span class="send-modal-label">Additional Options</span>
+          <div class="send-options send-options-inline">
+            <label class="send-option">
+              <input type="radio" name="deliveryMode" value="test">
+              <span>Test</span>
+            </label>
+            <label class="send-option">
+              <input type="radio" name="deliveryMode" value="live" checked>
+              <span>Live</span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <div class="send-modal-footer">
+        <button type="button" class="btn btn-send-secondary" id="sendModalCancel">Cancel</button>
+        <button type="button" class="btn btn-send-primary" id="sendModalSubmit">Send</button>
+      </div>
+    </div>
+  </div>
+
+<script src="../Invoice_template/icons-sprite.js"></script>
   <script src="../Invoice_template/editor-menus.js"></script>
   <script src="combine.js"></script>
 </body>

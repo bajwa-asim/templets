@@ -107,8 +107,6 @@
       if (!menu.contains(e.target)) setMenuOpen(false);
     });
 
-    applyStatus("draft");
-
     var numberInput = document.getElementById("estimateNumberInput");
     var minusBtn = document.getElementById("estimateMinus");
     var plusBtn = document.getElementById("estimatePlus");
@@ -120,6 +118,112 @@
     }
     if (minusBtn) minusBtn.addEventListener("click", function () { bumpNumber(-1); });
     if (plusBtn) plusBtn.addEventListener("click", function () { bumpNumber(1); });
+
+    /* Send modal — same flow as estimates.html */
+    var sendOverlay = document.getElementById("sendModalOverlay");
+    var sendClose = document.getElementById("sendModalClose");
+    var sendCancel = document.getElementById("sendModalCancel");
+    var sendSubmit = document.getElementById("sendModalSubmit");
+    var sendInvoiceName = document.getElementById("sendInvoiceName");
+    var sendEmailField = document.getElementById("sendEmailField");
+    var sendCcField = document.getElementById("sendCcField");
+    var sendBccField = document.getElementById("sendBccField");
+    var sendPhoneField = document.getElementById("sendPhoneField");
+    var toggleCcButton = document.getElementById("toggleCcButton");
+    var toggleBccButton = document.getElementById("toggleBccButton");
+    var templateName = document.getElementById("templateName");
+    var currentStatus = "draft";
+
+    function setModal(overlay, open) {
+      if (!overlay) return;
+      overlay.hidden = !open;
+      document.body.classList.toggle("modal-open", !!open);
+    }
+
+    function setFieldVisibility(el, visible) {
+      if (!el) return;
+      el.hidden = !visible;
+      el.classList.toggle("is-collapsed", !visible);
+    }
+
+    function getSendMode() {
+      var checked = document.querySelector('input[name="sendAs"]:checked');
+      return checked ? checked.value : "email-text";
+    }
+
+    function updateSendModalFields() {
+      var mode = getSendMode();
+      var showEmail = mode === "email" || mode === "email-text";
+      var showPhone = mode === "text" || mode === "email-text";
+      setFieldVisibility(sendEmailField, showEmail);
+      setFieldVisibility(sendPhoneField, showPhone);
+      if (!showEmail) {
+        setFieldVisibility(sendCcField, false);
+        setFieldVisibility(sendBccField, false);
+        if (toggleCcButton) toggleCcButton.classList.remove("is-active");
+        if (toggleBccButton) toggleBccButton.classList.remove("is-active");
+      }
+    }
+
+    function openSendModal() {
+      if (!sendOverlay) return;
+      if (sendInvoiceName) {
+        sendInvoiceName.value = (templateName && templateName.textContent.trim()) || "New Invoice";
+      }
+      updateSendModalFields();
+      setModal(sendOverlay, true);
+    }
+
+    function closeSendModal() {
+      setModal(sendOverlay, false);
+    }
+
+    var baseApplyStatus = applyStatus;
+    applyStatus = function (status) {
+      currentStatus = status;
+      baseApplyStatus(status);
+    };
+
+    if (primaryBtn) {
+      primaryBtn.addEventListener("click", function () {
+        if (currentStatus === "accepted") return;
+        if (primaryBtn.hidden) return;
+        openSendModal();
+      });
+    }
+
+    document.querySelectorAll('input[name="sendAs"]').forEach(function (radio) {
+      radio.addEventListener("change", updateSendModalFields);
+    });
+
+    if (toggleCcButton) {
+      toggleCcButton.addEventListener("click", function () {
+        var show = sendCcField && sendCcField.classList.contains("is-collapsed");
+        setFieldVisibility(sendCcField, show);
+        toggleCcButton.classList.toggle("is-active", show);
+      });
+    }
+    if (toggleBccButton) {
+      toggleBccButton.addEventListener("click", function () {
+        var show = sendBccField && sendBccField.classList.contains("is-collapsed");
+        setFieldVisibility(sendBccField, show);
+        toggleBccButton.classList.toggle("is-active", show);
+      });
+    }
+
+    if (sendClose) sendClose.addEventListener("click", closeSendModal);
+    if (sendCancel) sendCancel.addEventListener("click", closeSendModal);
+    if (sendSubmit) sendSubmit.addEventListener("click", closeSendModal);
+    if (sendOverlay) {
+      sendOverlay.addEventListener("click", function (e) {
+        if (e.target === sendOverlay) closeSendModal();
+      });
+    }
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && sendOverlay && !sendOverlay.hidden) closeSendModal();
+    });
+
+    applyStatus("draft");
   }
 
   /* estimate_pages-only extras (templates already wired by script.js / estimate.js) */
