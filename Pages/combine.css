@@ -1,0 +1,96 @@
+/* Estimate pages demo — additive only (uses Invoice_template/style.css) */
+.ep-demo {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 16px 14px 40px;
+}
+
+.ep-demo-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.ep-demo-tab {
+  height: 36px;
+  padding: 0 14px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #4b5563;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.ep-demo-tab.is-active {
+  background: #eaf3ff;
+  border-color: #bfdbfe;
+  color: #2f80ed;
+}
+
+.ep-demo .page-label {
+  margin-bottom: 12px;
+}
+
+.ep-demo .topbar-menu-dropdown {
+  min-width: 220px;
+}
+
+.ep-demo .topbar-menu-item {
+  width: 100%;
+  text-align: left;
+  border: 0;
+  background: transparent;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #111827;
+  cursor: pointer;
+}
+
+.ep-demo .topbar-menu-item:hover {
+  background: #f3f4f6;
+}
+
+.ep-demo .topbar-menu-item.is-danger {
+  color: #ef4444;
+}
+
+.ep-demo .editor-toolbar {
+  background: #F0F1F3;
+}
+
+/* Estimate Number steppers — exact image match */
+.ep-demo .number-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px 0 8px;
+  border-left: none;
+  background: #fff;
+}
+
+.ep-demo .mini-control {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #e3eaf5;
+  border-radius: 8px;
+  background: #fff;
+  color: #2f80ed;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0 3px;
+  cursor: pointer;
+}
+
+.ep-demo .mini-control.is-plus,
+.ep-demo .mini-control.is-plus svg {
+  color: #2f80ed;
+  border-color: #e3eaf5;
+}
+

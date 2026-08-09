@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimate Pages</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../Invoice_template/style.css">
+  <link rel="stylesheet" href="combine.css">
+</head>
+<body>
+  <div class="ep-demo">
+    <div class="ep-demo-tabs" role="tablist" aria-label="Estimate status pages">
+      <button type="button" class="ep-demo-tab is-active" data-status="draft" role="tab" aria-selected="true">Draft Estimate</button>
+      <button type="button" class="ep-demo-tab" data-status="sent" role="tab" aria-selected="false">Sent Estimate</button>
+      <button type="button" class="ep-demo-tab" data-status="accepted" role="tab" aria-selected="false">Accepted Estimate</button>
+      <button type="button" class="ep-demo-tab" data-status="declined" role="tab" aria-selected="false">Declined Estimate</button>
+    </div>
+    <p class="page-label" id="statusLabel">Draft Estimate</p>
+
+    <div class="invoice-page">
+      <div class="page-topbar">
+        <a href="../Invoice_template/estimates.html" class="back-link">
+          <span class="icon">&larr;</span>
+          <span>Back</span>
+        </a>
+        <div class="page-title-wrap">
+          <h1 class="page-title" id="templateName" contenteditable="true" spellcheck="false">Estimate Name</h1>
+          <button type="button" class="title-edit-btn" aria-label="Edit"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button>
+        </div>
+        <div class="topbar-actions">
+          <div class="topbar-menu" id="topbarMenu" hidden>
+            <button type="button" class="topbar-menu-trigger" id="topbarMenuTrigger" aria-label="Open actions menu" aria-expanded="false" aria-haspopup="true">
+              <span></span><span></span><span></span>
+            </button>
+            <div class="topbar-menu-dropdown" id="topbarMenuDropdown" hidden></div>
+          </div>
+          <button type="button" class="btn btn-save btn-ghost" id="saveButton">
+            <svg aria-hidden="true"><use href="#icon-save"></use></svg>
+            <span>Save</span>
+          </button>
+          <button type="button" class="btn btn-save" id="primaryButton">
+            <svg aria-hidden="true"><use href="#icon-send"></use></svg>
+            <span>Send</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="workspace">
+        <div class="row no-gutters">
+          <div class="col-xl-6 col-lg-7">
+            <div class="editor-panel">
+              <div class="panel-card estimate-options-card">
+                <div class="card-heading">
+                  <div class="card-title-row">
+                    <h2>Business Information</h2>
+                    <button type="button" class="edit-toggle" aria-label="Edit business"><svg aria-hidden="true"><use href="#icon-pen"></use></svg></button>
+                  </div>
+                  <button type="button" class="arrow-btn">&rsaquo;</button>
+                </div>
+                <div class="info-list">
+                  <div class="info-line"><strong>Company Name:</strong> <span>ABC 3</span></div>
+                  <div class="info-line"><strong>Email:</strong> <span>riley.bennett@corporate.net</span></div>
+                  <div class="info-line"><strong>Phone:</strong> <span>+13141236547</span></div>
+                  <div class="info-line"><strong>Address:</strong> <span>Oxford Street United Kingdom</span></div>
+                </div>
+              </div>
+
+              <div class="panel-card">
+                <div class="card-heading">
+                  <h2>Customer Information</h2>
+                  <button type="button" class="arrow-btn">&rsaquo;</button>
+                </div>
+                <div class="form-group">
+                  <label>Customer</label>
+                  <div class="select-wrap">
+                    <select class="form-control custom-select">
+                      <option selected>Phoenix Baker</option>
+                      <option>Lana Steiner</option>
+                    </select>
+                  </div>
+                </div>
+                <label class="check-line estimate-check mt-2 mb-0">
+                  <input type="checkbox">
+                  <span>Link Opportunity</span>
+                </label>
+              </div>
+
+              <div class="panel-card">
+                <div class="card-heading">
+                  <h2>We need option for Estimate</h2>
+                  <button type="button" class="arrow-btn">&rsaquo;</button>
+                </div>
+                <div class="estimate-grid">
+                  <div class="form-group">
+                    <label>Estimate Number</label>
+                    <div class="invoice-number-box compact">
+                      <span class="prefix-box">EST-</span>
+                      <input type="text" class="form-control invoice-number-input" value="2" id="estimateNumberInput">
+                      <span class="number-actions">
+                        <button type="button" class="mini-control" id="estimateMinus" aria-label="Decrease">-</button>
+                        <button type="button" class="mini-control" id="estimatePlus" aria-label="Increase">+</button>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Invoice Issue Date</label>
+                    <div class="input-icon-wrap">
+                      <input type="date" class="form-control" value="2026-08-04">
+                      <button type="button" class="date-trigger" aria-label="Calendar"><svg aria-hidden="true"><use href="#icon-calendar-alt"></use></svg></button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label>Invoice Due Date</label>
+                    <div class="input-icon-wrap">
+                      <input type="date" class="form-control" value="2026-08-04">
+                      <button type="button" class="date-trigger" aria-label="Calendar"><svg aria-hidden="true"><use href="#icon-calendar-alt"></use></svg></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-card">
+                <div class="card-heading add-product-heading">
+                  <div>
+                    <div class="inline-title-row">
+                      <h2>Add Product</h2>
+                      <label class="switch-row">
+                        <input type="checkbox">
+                        <span class="switch-ui"></span>
+                        <span>Enable Tax Automatically</span>
+                      </label>
+                    </div>
+                    <p>Choose or add new products from your product catalogue to this estimate</p>
+                  </div>
+                  <button type="button" class="arrow-btn">&rsaquo;</button>
+                </div>
+                <div class="products-box">
+                  <div class="products-header">
+                    <div>Item</div>
+                    <div>Price</div>
+                    <div>Quantity</div>
+                    <div>Tax</div>
+                    <div>Action</div>
+                  </div>
+                  <div id="productRows">
+                    <div class="product-row">
+                      <div class="product-field">
+                        <input type="text" class="form-control item-name" value="Product 1">
+                        <button type="button" class="description-link">Add Description</button>
+                      </div>
+                      <div><div class="money-input"><span>$</span><input type="number" class="form-control item-price" value="20"></div></div>
+                      <div><input type="number" class="form-control qty-input" value="2"></div>
+                      <div><div class="money-input"><span>%</span><input type="number" class="form-control" value="0"></div></div>
+                      <div class="action-buttons">
+                        <button type="button" class="circle-btn add-row" aria-label="Add"><svg aria-hidden="true"><use href="#icon-add-field"></use></svg></button>
+                        <button type="button" class="circle-btn remove-row" aria-label="Delete"><svg aria-hidden="true"><use href="#icon-trash"></use></svg></button>
+                      </div>
+                    </div>
+                    <div class="product-row">
+                      <div class="product-field">
+                        <input type="text" class="form-control item-name" value="Product 1">
+                        <button type="button" class="description-link">Add Description</button>
+                      </div>
+                      <div><div class="money-input"><span>$</span><input type="number" class="form-control item-price" value="20"></div></div>
+                      <div><input type="number" class="form-control qty-input" value="2"></div>
+                      <div><div class="money-input"><span>%</span><input type="number" class="form-control" value="0"></div></div>
+                      <div class="action-buttons">
+                        <button type="button" class="circle-btn add-row" aria-label="Add"><svg aria-hidden="true"><use href="#icon-add-field"></use></svg></button>
+                        <button type="button" class="circle-btn remove-row" aria-label="Delete"><svg aria-hidden="true"><use href="#icon-trash"></use></svg></button>
+                      </div>
+                    </div>
+                    <div class="product-row">
+                      <div class="product-field">
+                        <input type="text" class="form-control item-name" value="Product 1">
+                        <button type="button" class="description-link">Add Description</button>
+                      </div>
+                      <div><div class="money-input"><span>$</span><input type="number" class="form-control item-price" value="20"></div></div>
+                      <div><input type="number" class="form-control qty-input" value="2"></div>
+                      <div><div class="money-input"><span>%</span><input type="number" class="form-control" value="0"></div></div>
+                      <div class="action-buttons">
+                        <button type="button" class="circle-btn add-row" aria-label="Add"><svg aria-hidden="true"><use href="#icon-add-field"></use></svg></button>
+                        <button type="button" class="circle-btn remove-row" aria-label="Delete"><svg aria-hidden="true"><use href="#icon-trash"></use></svg></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="totals-card">
+                <div class="total-line"><span>Subtotal</span><strong>$120.00</strong></div>
+                <div class="discount-block">
+                  <div class="discount-head">Add Discount</div>
+                  <div class="discount-controls">
+                    <div class="discount-options">
+                      <label class="radio-line"><input type="radio" name="discountMode" value="percent" checked><span>Percentage</span></label>
+                      <label class="radio-line"><input type="radio" name="discountMode" value="amount"><span>Custom Amount</span></label>
+                    </div>
+                    <div class="mini-input"><span class="mini-prefix">%</span><input type="number" value="0"></div>
+                  </div>
+                </div>
+                <div class="tax-block">
+                  <div class="discount-head">Add Tax</div>
+                  <div class="tax-input-wrap"><div class="mini-input"><span class="mini-prefix">%</span><input type="number" value="0"></div></div>
+                </div>
+                <div class="amount-due-line"><span>Amount Due</span><strong>$120.00</strong></div>
+                <button type="button" class="text-link-action">Add Payment Schedule</button>
+              </div>
+
+              <div class="panel-card additional-card">
+                <div class="card-heading add-product-heading">
+                  <div>
+                    <h2>Additional Options</h2>
+                    <p>Add terms and notes to your invoice</p>
+                  </div>
+                  <button type="button" class="arrow-btn">&rsaquo;</button>
+                </div>
+
+                <div class="option-divider"></div>
+
+                <label class="check-line">
+                  <input type="checkbox" id="termsCheck" checked>
+                  <span>Terms and Conditions</span>
+                </label>
+
+                <div class="notes-block">
+                  <label for="notesArea">Add Notes / Terms</label>
+                  <div class="editor-wrap">
+                    <div id="notesEditor" class="notes-editor" contenteditable="true" data-placeholder="Write something here ..."></div>
+                    <div class="editor-toolbar">
+                      <div class="toolbar-top">
+                        <button type="button" class="tool-btn soft-btn" data-command="undo" aria-label="Undo"><svg aria-hidden="true"><use href="#icon-undo"></use></svg></button>
+                        <button type="button" class="tool-btn soft-btn" data-command="redo" aria-label="Redo"><svg aria-hidden="true"><use href="#icon-redo"></use></svg></button>
+                        <select class="tool-select font-select" id="fontNameSelect"><option>Inter</option></select>
+                        <select class="tool-select type-select" id="formatBlockSelect">
+                          <option value="P">Paragraph</option>
+                          <option value="H1">Heading 1</option>
+                          <option value="H2">Heading 2</option>
+                        </select>
+                      </div>
+                      <div class="toolbar-main">
+                        <select class="tool-select small-select" id="fontSizeSelect">
+                          <option value="2">10</option>
+                          <option value="3" selected>12</option>
+                          <option value="4">14</option>
+                        </select>
+                        <select class="tool-select small-select" id="lineHeightSelect">
+                          <option value="1">1.0</option>
+                          <option value="1.5" selected>1.5</option>
+                          <option value="2">2.0</option>
+                        </select>
+                        <div class="tool-group">
+                          <button type="button" class="tool-btn" data-command="bold" aria-label="Bold"><svg aria-hidden="true"><use href="#icon-bold"></use></svg></button>
+                          <button type="button" class="tool-btn" data-command="italic" aria-label="Italic"><svg aria-hidden="true"><use href="#icon-italic"></use></svg></button>
+                          <button type="button" class="tool-btn" data-command="underline" aria-label="Underline"><svg aria-hidden="true"><use href="#icon-underline"></use></svg></button>
+                          <button type="button" class="tool-btn" data-command="strikeThrough" aria-label="Strikethrough"><svg aria-hidden="true"><use href="#icon-strikethrough"></use></svg></button>
+                        </div>
+                        <div class="tool-group">
+                          <button type="button" class="tool-btn accent-btn" data-command="foreColor" data-value="#d69e2e" aria-label="Text color"><svg aria-hidden="true"><use href="#icon-text-color"></use></svg></button>
+                          <button type="button" class="tool-btn" data-command="removeFormat" aria-label="More">&#9662;</button>
+                          <button type="button" class="tool-btn" data-command="bold" aria-label="Bold"><svg aria-hidden="true"><use href="#icon-bold"></use></svg></button>
+                          <button type="button" class="tool-btn" data-command="italic" aria-label="Italic"><svg aria-hidden="true"><use href="#icon-italic"></use></svg></button>
+                        </div>
+                        <div class="tool-group">
+                          <button type="button" class="tool-btn" data-command="insertUnorderedList" aria-label="Bullet list"><svg aria-hidden="true"><use href="#icon-list-bullet"></use></svg></button>
+                          <button type="button" class="tool-btn" data-command="insertOrderedList">&#8783;</button>
+                        </div>
+                      </div>
+                      <div class="toolbar-bottom">
+                        <div class="tool-group">
+                          <button type="button" class="tool-btn" data-command="justifyLeft" aria-label="Align left"><svg aria-hidden="true"><use href="#icon-align-left-lines"></use></svg></button>
+                          <button type="button" class="tool-btn" data-command="justifyCenter">&#8801;</button>
+                          <button type="button" class="tool-btn" data-command="justifyRight">&#8801;</button>
+                          <button type="button" class="tool-btn" data-command="justifyFull">&#9776;</button>
+                        </div>
+                        <div class="tool-group">
+                          <button type="button" class="tool-btn" data-command="outdent">&#8644;</button>
+                          <button type="button" class="tool-btn" data-action="link" aria-label="Insert link"><svg aria-hidden="true"><use href="#icon-link"></use></svg></button>
+                          <button type="button" class="tool-btn" id="imageInsertButton" aria-label="Insert image"><svg aria-hidden="true"><use href="#icon-image"></use></svg></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <label class="check-line disabled-line estimate-check mt-3 mb-2">
+                  <input type="checkbox" disabled>
+                  <span>Charges Processing Fees</span>
+                </label>
+
+                <label class="check-line attachment-toggle mb-3">
+                  <input type="checkbox" id="attachmentCheck" checked>
+                  <span>Add Attachment</span>
+                </label>
+
+                <div class="upload-panel" id="uploadPanel">
+                  <div class="upload-inner">
+                    <div class="upload-icon">
+                      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                        <path d="M7 18a4.2 4.2 0 0 1-.7-8.34 5.5 5.5 0 0 1 10.6-2A4.5 4.5 0 0 1 17 18H7z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"></path>
+                        <path d="M12 20v-7M9.2 15.8 12 13l2.8 2.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                      </svg>
+                    </div>
+                    <label for="attachmentInput" class="upload-link">Click to upload</label>
+                    <div class="upload-types">PDF, CSV, PNG</div>
+                    <div class="upload-note">Maximum of 10 files, not exceeding 20 Mb, can be attached</div>
+                    <input type="file" id="attachmentInput" multiple hidden>
+                    <input type="file" id="editorImageInput" accept="image/*" hidden>
+                  </div>
+                </div>
+
+                <label class="check-line estimate-check send-invoice-line mb-2">
+                  <input type="checkbox" id="sendInvoiceToggle" checked>
+                  <span>Send Invoice</span>
+                </label>
+
+                <label class="toggle-line estimate-check mb-0">
+                  <input type="checkbox" id="directPaymentsToggle">
+                  <span class="switch-ui"></span>
+                  <span>Enable Direct Payments</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-6 col-lg-5">
+            <div class="preview-panel">
+              <div class="preview-card">
+                <div class="preview-head">
+                  <h3>Estimate</h3>
+                </div>
+
+                <div class="company-meta">
+                  ABC 3<br>
+                  +92447475763830<br>
+                  Oxford Street<br>
+                  London, Greater London<br>
+                  W1C 1JT<br>
+                  GB
+                </div>
+
+                <div class="preview-meta-grid preview-meta-grid-wide">
+                  <div>
+                    <h4>Billed To</h4>
+                    <p>John's Company<br>John Doe 1234 Main Street Austin, Texas 54321 US</p>
+                  </div>
+                  <div>
+                    <h4>Estimate Number</h4>
+                    <p>EST-10</p>
+                  </div>
+                  <div>
+                    <h4>Issue Date</h4>
+                    <p>August 4, 2026</p>
+                    <h4 class="due-date-label">Due Date</h4>
+                    <p>August 18, 2026</p>
+                  </div>
+                </div>
+
+                <div class="preview-table-wrap">
+                  <table class="table preview-table mb-0">
+                    <thead>
+                      <tr>
+                        <th>Item Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Tax</th>
+                        <th class="text-right">Subtotal</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Product 1</td><td>$20.00</td><td>2</td><td>-</td><td class="text-right">$20.00</td></tr>
+                      <tr><td>Product 1</td><td>$20.00</td><td>2</td><td>-</td><td class="text-right">$20.00</td></tr>
+                      <tr><td>Product 1</td><td>$20.00</td><td>2</td><td>-</td><td class="text-right">$20.00</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="preview-totals">
+                  <div class="preview-total-line"><span>Subtotal</span><strong>$60.00</strong></div>
+                  <div class="preview-total-line"><span>Tax</span><strong>$0.00</strong></div>
+                  <div class="preview-total-line total-due"><span>Amount Due (GBP)</span><strong>$60.00</strong></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../Invoice_template/icons-sprite.js"></script>
+  <script src="../Invoice_template/editor-menus.js"></script>
+  <script src="combine.js"></script>
+</body>
+</html>
