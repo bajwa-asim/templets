@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templates</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="estimate-list-page templates-list-page">
+    <main class="estimate-shell">
+      <section class="estimate-intro">
+        <h1 class="estimate-heading">Templates</h1>
+        <p class="estimate-copy">Create templates for invoices and estimates for automation and consistency.</p>
+      </section>
+
+      <section class="estimate-status-tabs" id="typeTabs" aria-label="Template type">
+        <button type="button" class="estimate-tab is-active" data-type="invoice">Invoices</button>
+        <button type="button" class="estimate-tab" data-type="estimate">Estimates</button>
+      </section>
+
+      <section class="estimate-panel">
+        <div class="estimate-panel-head">
+          <h2 class="estimate-panel-title" id="panelTitle">Invoices</h2>
+          <a class="estimate-primary-btn" href="#" id="createTemplateBtn">Create Template</a>
+        </div>
+
+        <div class="estimate-search-row">
+          <label class="estimate-search" aria-label="Search templates">
+            <span class="estimate-search-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg>
+            </span>
+            <input type="search" id="searchInput" placeholder="Search ...">
+          </label>
+        </div>
+
+        <div class="estimate-table-wrap">
+          <table class="estimate-table">
+            <thead>
+              <tr id="tableHeadRow">
+                <th>Template Name</th>
+                <th>Amount</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="templatesTableBody"></tbody>
+          </table>
+          <div class="estimate-empty" id="emptyState" hidden>No templates found.</div>
+        </div>
+
+        <div class="estimate-panel-foot">
+          <div class="estimate-results">
+            <span>Showing</span>
+            <label class="estimate-select-wrap">
+              <select id="pageSizeSelect">
+                <option selected>50</option>
+                <option>25</option>
+                <option>10</option>
+                <option>5</option>
+              </select>
+            </label>
+            <span id="resultsMeta">rows out of 0</span>
+          </div>
+          <nav class="estimate-pagination" id="pagination"></nav>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="ep-modal-overlay" id="deleteModalOverlay" hidden>
+    <div class="ep-modal" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+      <div class="ep-modal-head">
+        <div class="ep-modal-title-wrap">
+          <span class="ep-modal-icon ep-modal-icon-danger" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path d="M4 6h12M8 6V4.8c0-.4.4-.8.8-.8h2.4c.4 0 .8.4.8.8V6M15.2 6l-.7 10.2a1 1 0 0 1-1 .8H6.5a1 1 0 0 1-1-.8L4.8 6M8.5 9.2v5M11.5 9.2v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h2 id="deleteModalTitle">Delete Template</h2>
+        </div>
+        <button type="button" class="ep-modal-close" id="deleteModalClose" aria-label="Close">&times;</button>
+      </div>
+      <p class="ep-modal-text">Are you sure you want to delete this template? This action cannot be undone.</p>
+      <div class="ep-modal-footer">
+        <button type="button" class="ep-btn ep-btn-cancel" id="deleteModalCancel">Cancel</button>
+        <button type="button" class="ep-btn ep-btn-danger" id="deleteModalConfirm">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="templates.js"></script>
+</body>
+</html>
