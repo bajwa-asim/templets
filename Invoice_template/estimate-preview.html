@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estimate Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="estimate-preview-page">
+  <div class="ep-shell">
+    <article class="ep-card preview-card" id="estimatePreviewCard" data-status="pending">
+      <header class="ep-header">
+        <div class="ep-header-left">
+          <div class="ep-title-row">
+            <h1>Estimate</h1>
+            <span class="ep-badge ep-badge-accepted" id="statusBadgeAccepted" hidden>Accepted</span>
+            <span class="ep-badge ep-badge-declined" id="statusBadgeDeclined" hidden>Declined</span>
+          </div>
+          <p class="ep-created">Created: Aug 7, 2026</p>
+        </div>
+        <div class="ep-header-actions" id="pendingActions">
+          <button type="button" class="ep-btn ep-btn-reject" id="rejectEstimateBtn">Reject</button>
+          <button type="button" class="ep-btn ep-btn-accept" id="acceptEstimateBtn">Accept</button>
+        </div>
+        <div class="ep-header-actions" id="acceptedActions" hidden>
+          <button type="button" class="ep-btn ep-btn-download" id="downloadEstimateBtn">Download</button>
+        </div>
+      </header>
+
+      <div class="company-meta">
+        ABC 3<br>
+        +92447475763830<br>
+        Oxford Street<br>
+        London, Greater London<br>
+        W1C 1JT<br>
+        GB
+      </div>
+
+      <div class="preview-meta-grid preview-meta-grid-wide">
+        <div>
+          <h4>Billed To</h4>
+          <p>John's Company John Doe<br>1234 Main Street Austin, Texas 54321 US</p>
+        </div>
+        <div>
+          <h4>Estimate Number</h4>
+          <p>EST-04</p>
+        </div>
+        <div>
+          <h4>Issue Date</h4>
+          <p>August 4, 2026</p>
+          <h4 class="due-date-label">Due Date</h4>
+          <p>August 18, 2026</p>
+        </div>
+      </div>
+
+      <div class="preview-table-wrap">
+        <table class="table preview-table mb-0">
+          <thead>
+            <tr>
+              <th>Item Name</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Tax</th>
+              <th class="text-right">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Product 1</td><td>$20</td><td>2</td><td>-</td><td class="text-right">$20</td></tr>
+            <tr><td>Product 1</td><td>$20</td><td>2</td><td>-</td><td class="text-right">$20</td></tr>
+            <tr><td>Product 1</td><td>$20</td><td>2</td><td>-</td><td class="text-right">$20</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="preview-totals">
+        <div class="preview-total-line">
+          <span>Subtotal</span>
+          <strong>$60.00</strong>
+        </div>
+        <div class="preview-total-line">
+          <span>Tax</span>
+          <strong>$60.00</strong>
+        </div>
+        <div class="preview-total-line total-due">
+          <span>Amount Due (GBP)</span>
+          <strong>$60.00</strong>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <div class="ep-modal-overlay" id="acceptModalOverlay" hidden>
+    <div class="ep-modal" role="dialog" aria-modal="true" aria-labelledby="acceptModalTitle">
+      <div class="ep-modal-head">
+        <div class="ep-modal-title-wrap">
+          <span class="ep-modal-icon" aria-hidden="true">
+            <svg viewBox="0 0 20 20" fill="none">
+              <path d="M5.5 10.2 8.4 13.1 14.5 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h2 id="acceptModalTitle">Accept Estimate</h2>
+        </div>
+        <button type="button" class="ep-modal-close" id="acceptModalClose" aria-label="Close">&times;</button>
+      </div>
+      <p class="ep-modal-text">Are you sure you want to accept estimate? This action cannot be undone.</p>
+      <div class="ep-modal-footer">
+        <button type="button" class="ep-btn ep-btn-cancel" id="acceptModalCancel">Cancel</button>
+        <button type="button" class="ep-btn ep-btn-submit" id="acceptModalSubmit">Submit</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="estimate-preview.js"></script>
+</body>
+</html>

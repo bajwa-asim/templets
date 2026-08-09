@@ -141,6 +141,14 @@
     ].join("");
   }
 
+  function getEstimatePageUrl(item, action) {
+    var params = new URLSearchParams();
+    params.set("id", item.id);
+    params.set("status", item.status);
+    params.set("mode", action);
+    return "create-estimate.html?" + params.toString();
+  }
+
   function renderTable() {
     var filtered = getFilteredEstimates();
     var totalRows = filtered.length;
@@ -155,7 +163,7 @@
     tableBody.innerHTML = items.map(function (item) {
       return [
         '<tr data-id="', item.id, '">',
-        '<td><a href="create-estimate.html" class="estimate-link">', item.name, "</a></td>",
+        '<td><a href="', getEstimatePageUrl(item, "open"), '" class="estimate-link">', item.name, "</a></td>",
         "<td>", item.number, "</td>",
         '<td><div class="estimate-customer-cell"><span class="estimate-avatar ', getAvatarTone(item.customer), '">', getInitials(item.customer), '</span><div><div class="estimate-customer-name">', item.customer, '</div><div class="estimate-customer-handle">', item.handle, "</div></div></div></td>",
         "<td>", formatShortDate(item.issueDate), "</td>",
@@ -274,7 +282,7 @@
       }
 
       if (action === "open" || action === "edit" || action === "view") {
-        window.location.href = "create-estimate.html";
+        window.location.href = getEstimatePageUrl(item, action);
         return;
       }
 

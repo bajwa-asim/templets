@@ -22,6 +22,16 @@
         <button type="button" class="title-edit-btn" id="templateEditButton" aria-label="Edit template name">&#9998;</button>
       </div>
       <div class="topbar-actions">
+        <div class="topbar-menu" id="topbarMenu" hidden>
+          <button type="button" class="topbar-menu-trigger" id="topbarMenuTrigger" aria-label="Open actions menu" aria-expanded="false" aria-haspopup="true">
+            <span></span><span></span><span></span>
+          </button>
+          <div class="topbar-menu-dropdown" id="topbarMenuDropdown" hidden>
+            <button type="button" class="topbar-menu-item" id="copyLinkAction">Copy Link</button>
+            <button type="button" class="topbar-menu-item" id="acceptEstimateAction">Mark as Accepted</button>
+            <button type="button" class="topbar-menu-item is-danger" id="deleteEstimateAction">Delete Estimate</button>
+          </div>
+        </div>
         <button type="button" class="btn btn-save btn-ghost" id="saveButton">
           <svg viewBox="0 0 20 20" aria-hidden="true">
             <path d="M5 3.5h8l2.5 2.5v10a1 1 0 0 1-1 1h-9a1 1 0 0 1-1-1v-11a1 1 0 0 1 1-1z"></path>
@@ -43,7 +53,7 @@
       <div class="row no-gutters">
         <div class="col-xl-6 col-lg-7">
           <div class="editor-panel">
-            <div class="panel-card">
+            <div class="panel-card estimate-options-card">
               <div class="card-heading">
                 <div class="card-title-row">
                   <h2>Business Information</h2>
@@ -99,7 +109,7 @@
               </label>
             </div>
 
-            <div class="panel-card estimate-options-card">
+            <div class="panel-card">
               <div class="card-heading">
                 <h2>We need option for Estimate</h2>
                 <button type="button" class="arrow-btn">&rsaquo;</button>

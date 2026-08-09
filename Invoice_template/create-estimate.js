@@ -14,6 +14,13 @@
   var discountPrefix = document.getElementById("discountPrefix");
   var saveButton = document.getElementById("saveButton");
   var sendButton = document.getElementById("sendButton");
+  var backLink = document.querySelector(".back-link");
+  var topbarMenu = document.getElementById("topbarMenu");
+  var topbarMenuTrigger = document.getElementById("topbarMenuTrigger");
+  var topbarMenuDropdown = document.getElementById("topbarMenuDropdown");
+  var copyLinkAction = document.getElementById("copyLinkAction");
+  var acceptEstimateAction = document.getElementById("acceptEstimateAction");
+  var deleteEstimateAction = document.getElementById("deleteEstimateAction");
   var sendModalOverlay = document.getElementById("sendModalOverlay");
   var sendModalClose = document.getElementById("sendModalClose");
   var sendModalCancel = document.getElementById("sendModalCancel");
@@ -50,6 +57,11 @@
   var paymentScheduleButton = document.getElementById("paymentScheduleButton");
   var sendInvoiceToggle = document.getElementById("sendInvoiceToggle");
   var dateTriggers = document.querySelectorAll(".date-trigger");
+  var pageParams = new URLSearchParams(window.location.search);
+  var currentEstimateStatus = pageParams.get("status") || "";
+  var isSentEstimate = currentEstimateStatus === "sent";
+  var isAcceptedEstimate = currentEstimateStatus === "accepted";
+  var isDeclinedEstimate = currentEstimateStatus === "declined";
   var savedRange = null;
 
   function money(value) {
@@ -235,6 +247,84 @@
     document.body.classList.remove("modal-open");
   }
 
+  function openTopbarMenu() {
+    if (!topbarMenuDropdown || !topbarMenuTrigger) return;
+    topbarMenuDropdown.hidden = false;
+    topbarMenuTrigger.setAttribute("aria-expanded", "true");
+  }
+
+  function closeTopbarMenu() {
+    if (!topbarMenuDropdown || !topbarMenuTrigger) return;
+    topbarMenuDropdown.hidden = true;
+    topbarMenuTrigger.setAttribute("aria-expanded", "false");
+  }
+
+  function toggleTopbarMenu() {
+    if (!topbarMenuDropdown || topbarMenuDropdown.hidden) {
+      openTopbarMenu();
+    } else {
+      closeTopbarMenu();
+    }
+  }
+
+  function setButtonLabel(button, text) {
+    var label = button && button.querySelector("span");
+    if (label) label.textContent = text;
+  }
+
+  function setButtonIcon(button, variant) {
+    var icon = button && button.querySelector("svg");
+    if (!icon) return;
+
+    if (variant === "invoice") {
+      icon.innerHTML = '<path d="M6 3.5h8a1 1 0 0 1 1 1V16a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z"></path><path d="M8 7.5h4M8 10.5h4M8 13.5h4"></path>';
+      return;
+    }
+
+    icon.innerHTML = '<path d="M16.5 4.5 8.2 12.8"></path><path d="m16.5 4.5-5.4 10.8-1.7-5.1-5.1-1.7z"></path>';
+  }
+
+  function setupTopbarActions() {
+    if (!isSentEstimate && !isAcceptedEstimate && !isDeclinedEstimate) return;
+
+    if (topbarMenu) {
+      topbarMenu.hidden = false;
+    }
+
+    if (backLink) {
+      backLink.setAttribute("href", "estimates.html");
+    }
+
+    if (isSentEstimate) {
+      setButtonLabel(sendButton, "Resend");
+      setButtonIcon(sendButton, "send");
+      if (acceptEstimateAction) {
+        acceptEstimateAction.textContent = "Mark as Accepted";
+      }
+      return;
+    }
+
+    if (isAcceptedEstimate) {
+      setButtonLabel(sendButton, "Create Invoice");
+      setButtonIcon(sendButton, "invoice");
+      saveButton.disabled = true;
+      saveButton.classList.add("is-disabled");
+      if (acceptEstimateAction) {
+        acceptEstimateAction.textContent = "Unmark as Accepted";
+      }
+      return;
+    }
+
+    if (isDeclinedEstimate) {
+      sendButton.hidden = true;
+      saveButton.disabled = true;
+      saveButton.classList.add("is-disabled");
+      if (acceptEstimateAction) {
+        acceptEstimateAction.textContent = "Unmark as Declined";
+      }
+    }
+  }
+
   function getSelectedSendMode() {
     var checked = document.querySelector('input[name="sendAs"]:checked');
     return checked ? checked.value : "email-text";
@@ -286,14 +376,50 @@
   if (sendModalSubmit) {
     sendModalSubmit.addEventListener("click", function () {
       closeSendModal();
-      sendButton.querySelector("span").textContent = "Sent";
-      setTimeout(function () { sendButton.querySelector("span").textContent = "Send"; }, 1500);
+      window.location.href = "estimate-preview.html";
     });
   }
 
   if (sendModalOverlay) {
     sendModalOverlay.addEventListener("click", function (event) {
       if (event.target === sendModalOverlay) closeSendModal();
+    });
+  }
+
+  if (topbarMenuTrigger) {
+    topbarMenuTrigger.addEventListener("click", function (event) {
+      event.stopPropagation();
+      toggleTopbarMenu();
+    });
+  }
+
+  if (copyLinkAction) {
+    copyLinkAction.addEventListener("click", function () {
+      closeTopbarMenu();
+      saveButton.querySelector("span").textContent = "Link Copied";
+      setTimeout(function () { saveButton.querySelector("span").textContent = "Save"; }, 1500);
+    });
+  }
+
+  if (acceptEstimateAction) {
+    acceptEstimateAction.addEventListener("click", function () {
+      closeTopbarMenu();
+      if (isDeclinedEstimate) {
+        acceptEstimateAction.textContent = "Declined Removed";
+        setTimeout(function () { acceptEstimateAction.textContent = "Unmark as Declined"; }, 1500);
+      } else if (isAcceptedEstimate) {
+        acceptEstimateAction.textContent = "Accepted Removed";
+        setTimeout(function () { acceptEstimateAction.textContent = "Unmark as Accepted"; }, 1500);
+      } else {
+        acceptEstimateAction.textContent = "Accepted";
+        setTimeout(function () { acceptEstimateAction.textContent = "Mark as Accepted"; }, 1500);
+      }
+    });
+  }
+
+  if (deleteEstimateAction) {
+    deleteEstimateAction.addEventListener("click", function () {
+      window.location.href = "estimates.html";
     });
   }
 
@@ -318,8 +444,17 @@
   }
 
   document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && topbarMenuDropdown && !topbarMenuDropdown.hidden) {
+      closeTopbarMenu();
+    }
     if (event.key === "Escape" && sendModalOverlay && !sendModalOverlay.hidden) {
       closeSendModal();
+    }
+  });
+
+  document.addEventListener("click", function (event) {
+    if (topbarMenu && !topbarMenu.hidden && !topbarMenu.contains(event.target)) {
+      closeTopbarMenu();
     }
   });
 
@@ -436,5 +571,6 @@
   addRow({ name: "Product 1", price: 20, qty: 2, tax: 0 });
   notesEditor.innerHTML = "";
   notesEditor.style.lineHeight = lineHeightSelect.value;
+  setupTopbarActions();
   updateInvoice();
 }());
