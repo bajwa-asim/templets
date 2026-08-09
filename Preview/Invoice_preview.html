@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice Preview</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;min-height:100vh;background:#f3f4f6;font-family:Inter,sans-serif;color:#111827;">
+
+  <div style="display:flex;flex-wrap:wrap;gap:8px;max-width:640px;margin:0 auto;padding:20px 16px 0;" role="tablist" aria-label="Invoice preview states">
+    <button type="button" id="tabWebsite" data-status="website" role="tab" aria-selected="true" style="height:36px;padding:0 14px;border:1px solid #bfdbfe;border-radius:8px;background:#eaf3ff;color:#2f80ed;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;">Preview on website</button>
+    <button type="button" id="tabDownload" data-status="download" role="tab" aria-selected="false" style="height:36px;padding:0 14px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#4b5563;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;">Preview Invoice</button>
+  </div>
+
+  <div style="max-width:640px;margin:0 auto;padding:28px 16px 40px;">
+    <article id="invoicePreviewCard" data-status="website" style="min-height:auto;background:#fff;border:1px solid #e5e7eb;border-radius:8px;box-shadow:0 1px 2px rgba(16,24,40,0.04);padding:28px 32px 32px;">
+      <header style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding-bottom:18px;border-bottom:1px solid #e5e7eb;margin-bottom:24px;">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <h1 style="margin:0;font-size:28px;font-weight:700;line-height:1.2;color:#111827;">Invoice</h1>
+          </div>
+          <p style="margin:6px 0 0;font-size:13px;color:#6b7280;">Created: Aug 7, 2026</p>
+        </div>
+        <div id="downloadActions" hidden style="display:none;align-items:center;gap:10px;flex-shrink:0;">
+          <button type="button" id="downloadInvoiceBtn" style="appearance:none;border-radius:6px;font-family:inherit;font-size:14px;font-weight:600;line-height:1;cursor:pointer;padding:9px 18px;background:#1d7cf2;color:#fff;border:1px solid #1d7cf2;">Download</button>
+        </div>
+      </header>
+
+      <div style="color:#667085;font-size:13px;line-height:1.55;margin:12px 0 18px;">
+        ABC 3<br>
+        +82447475763838<br>
+        Oxford Street<br>
+        London, Greater London<br>
+        W1C 1JT<br>
+        GB
+      </div>
+
+      <div style="display:grid;grid-template-columns:1.15fr 0.9fr 1fr;gap:16px;margin-bottom:18px;align-items:start;width:100%;">
+        <div>
+          <h4 style="margin:0 0 6px;font-size:13px;font-weight:600;color:#111827;">Billed To</h4>
+          <p style="margin:0;color:#667085;font-size:13px;line-height:1.5;">John's Company John Doe<br>1234 Main Street Austin, Texas 54321 US</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 6px;font-size:13px;font-weight:600;color:#111827;">Invoice Number</h4>
+          <p style="margin:0;color:#667085;font-size:13px;line-height:1.5;">INV-04</p>
+        </div>
+        <div>
+          <h4 style="margin:0 0 6px;font-size:13px;font-weight:600;color:#111827;">Issue Date</h4>
+          <p style="margin:0;color:#667085;font-size:13px;line-height:1.5;">August 4, 2026</p>
+          <h4 style="margin:10px 0 6px;font-size:13px;font-weight:600;color:#111827;">Due Date</h4>
+          <p style="margin:0;color:#667085;font-size:13px;line-height:1.5;">August 18, 2026</p>
+        </div>
+      </div>
+
+      <div style="border:1px solid #edf1f7;border-radius:10px;overflow:hidden;">
+        <table style="width:100%;border-collapse:collapse;margin:0;">
+          <thead>
+            <tr>
+              <th style="border:0;background:#f7f8fb;color:#111827;font-size:12px;font-weight:600;text-align:left;padding:12px 14px;vertical-align:middle;">Item Name</th>
+              <th style="border:0;background:#f7f8fb;color:#111827;font-size:12px;font-weight:600;text-align:left;padding:12px 14px;vertical-align:middle;">Price</th>
+              <th style="border:0;background:#f7f8fb;color:#111827;font-size:12px;font-weight:600;text-align:left;padding:12px 14px;vertical-align:middle;">Quantity</th>
+              <th style="border:0;background:#f7f8fb;color:#111827;font-size:12px;font-weight:600;text-align:left;padding:12px 14px;vertical-align:middle;">Tax</th>
+              <th style="border:0;background:#f7f8fb;color:#111827;font-size:12px;font-weight:600;text-align:right;padding:12px 14px;vertical-align:middle;">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">Product 1</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">$20</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">2</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">-</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;text-align:right;">$20</td>
+            </tr>
+            <tr>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">Product 1</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">$20</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">2</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">-</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;text-align:right;">$20</td>
+            </tr>
+            <tr>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">Product 1</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">$20</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">2</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;">-</td>
+              <td style="border-top:1px solid #edf1f7;font-size:13px;color:#667085;padding:16px 14px;vertical-align:middle;text-align:right;">$20</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="width:100%;margin-top:64px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:15px;">
+          <span style="color:#111827;">Subtotal</span>
+          <strong style="color:#111827;font-size:16px;">$60.00</strong>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;font-size:15px;">
+          <span style="color:#111827;">Tax</span>
+          <strong style="color:#111827;font-size:16px;">$60.00</strong>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;font-size:15px;padding-top:10px;padding-bottom:10px;border-top:2px dashed #8ab6ff;border-bottom:2px dashed #8ab6ff;margin-bottom:0;">
+          <span style="color:#111827;">Amount Due (GBP)</span>
+          <strong style="color:#111827;font-size:16px;">$60.00</strong>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <script>
+  (function () {
+    var card = document.getElementById("invoicePreviewCard");
+    var downloadActions = document.getElementById("downloadActions");
+    var tabs = [document.getElementById("tabWebsite"), document.getElementById("tabDownload")];
+    var activeTab = "height:36px;padding:0 14px;border:1px solid #bfdbfe;border-radius:8px;background:#eaf3ff;color:#2f80ed;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;";
+    var idleTab = "height:36px;padding:0 14px;border:1px solid #e5e7eb;border-radius:8px;background:#fff;color:#4b5563;font-size:13px;font-weight:500;cursor:pointer;font-family:inherit;";
+
+    function setStatus(next) {
+      card.setAttribute("data-status", next);
+      var showDownload = next === "download";
+      downloadActions.hidden = !showDownload;
+      downloadActions.style.display = showDownload ? "flex" : "none";
+      tabs.forEach(function (tab) {
+        var on = tab.getAttribute("data-status") === next;
+        tab.setAttribute("aria-selected", on ? "true" : "false");
+        tab.style.cssText = on ? activeTab : idleTab;
+      });
+    }
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        setStatus(tab.getAttribute("data-status"));
+      });
+    });
+
+    setStatus("website");
+  }());
+  </script>
+</body>
+</html>
