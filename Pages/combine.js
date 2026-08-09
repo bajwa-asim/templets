@@ -1,7 +1,6 @@
 /* Shared Pages helpers — estimate_pages status tabs + shared extras */
 (function () {
   var tabs = Array.prototype.slice.call(document.querySelectorAll(".ep-demo-tab"));
-  var isTemplatePage = document.body.classList.contains("ep-template-page");
   var isStatusPages = tabs.length > 0;
 
   if (isStatusPages) {
@@ -226,8 +225,8 @@
     applyStatus("draft");
   }
 
-  /* estimate_pages-only extras (templates already wired by script.js / estimate.js) */
-  if (!isTemplatePage) {
+  /* estimate_pages only — templates/create_invoice use Invoice_template scripts */
+  if (isStatusPages) {
     var attachmentCheck = document.getElementById("attachmentCheck");
     var uploadPanel = document.getElementById("uploadPanel");
     if (attachmentCheck && uploadPanel) {
@@ -270,14 +269,9 @@
         imageInput.value = "";
       });
     }
-    if (window.initEditorMenus) window.initEditorMenus();
-  } else if (window.initEditorMenus) {
-    window.initEditorMenus();
   }
 
-  /* Standalone Create Invoice page */
   if (document.body.classList.contains("ep-create-invoice") && window.openInvoiceEditor) {
     window.openInvoiceEditor(null, "create");
-    if (window.initEditorMenus) window.initEditorMenus();
   }
 }());
