@@ -2999,18 +2999,91 @@ body.modal-open {
   margin-top: 24px;
 }
 
+@media (max-width: 991.98px) {
+  .estimate-preview-page .ep-shell {
+    padding: 20px 12px 32px;
+  }
+
+  .estimate-preview-page .ep-card.preview-card {
+    padding: 22px 18px 24px;
+  }
+
+  .estimate-preview-page .ep-header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .estimate-preview-page .ep-header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .estimate-preview-page .ep-meta,
+  .estimate-preview-page .preview-meta-grid,
+  .estimate-preview-page .preview-meta-grid-wide {
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+
+  .estimate-preview-page .ep-table-wrap,
+  .estimate-preview-page .preview-table-wrap {
+    overflow: hidden;
+  }
+
+  .estimate-preview-page .ep-table,
+  .estimate-preview-page .preview-table {
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  .estimate-preview-page .ep-table th,
+  .estimate-preview-page .ep-table td,
+  .estimate-preview-page .preview-table th,
+  .estimate-preview-page .preview-table td {
+    padding: 10px 8px;
+    font-size: 11px;
+    word-break: break-word;
+  }
+
+  .estimate-preview-page .ep-totals,
+  .estimate-preview-page .preview-totals {
+    width: 100%;
+    max-width: 100%;
+    margin-top: 28px;
+  }
+}
+
 @media (max-width: 767.98px) {
   .ep-card {
     padding: 24px 18px;
   }
 
-  .ep-header {
-    flex-direction: column;
+  .estimate-preview-page .ep-card.preview-card {
+    padding: 18px 12px 20px;
   }
 
-  .ep-meta {
+  .ep-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .ep-title-row h1 {
+    font-size: 22px;
+  }
+
+  .ep-header-actions {
+    width: 100%;
+  }
+
+  .ep-header-actions .ep-btn {
+    flex: 1 1 auto;
+  }
+
+  .ep-meta,
+  .estimate-preview-page .preview-meta-grid,
+  .estimate-preview-page .preview-meta-grid-wide {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 14px;
   }
 
   .ep-totals {
@@ -3020,6 +3093,22 @@ body.modal-open {
   .ep-table th:nth-child(n+2),
   .ep-table td:nth-child(n+2) {
     text-align: left;
+  }
+
+  .estimate-preview-page .ep-table th:nth-child(4),
+  .estimate-preview-page .ep-table td:nth-child(4),
+  .estimate-preview-page .preview-table th:nth-child(4),
+  .estimate-preview-page .preview-table td:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .estimate-preview-page .ep-table th:nth-child(3),
+  .estimate-preview-page .ep-table td:nth-child(3),
+  .estimate-preview-page .preview-table th:nth-child(3),
+  .estimate-preview-page .preview-table td:nth-child(3) {
+    display: none;
   }
 }
 
