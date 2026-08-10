@@ -241,13 +241,16 @@
       focusEditor();
       document.execCommand(command, false, value || null);
     }
+    function preserveEditorSelection(e) { e.preventDefault(); }
     document.querySelectorAll("[data-command]").forEach(function (button) {
+      button.addEventListener("mousedown", preserveEditorSelection);
       button.addEventListener("click", function () {
         exec(this.getAttribute("data-command"), this.getAttribute("data-value"));
       });
     });
     var linkBtn = document.querySelector('[data-action="link"]');
     if (linkBtn) {
+      linkBtn.addEventListener("mousedown", preserveEditorSelection);
       linkBtn.addEventListener("click", function () {
         var url = window.prompt("Enter URL");
         if (url) exec("createLink", url);
@@ -256,6 +259,7 @@
     var imageBtn = document.getElementById("imageInsertButton");
     var imageInput = document.getElementById("editorImageInput");
     if (imageBtn && imageInput) {
+      imageBtn.addEventListener("mousedown", preserveEditorSelection);
       imageBtn.addEventListener("click", function () { imageInput.click(); });
       imageInput.addEventListener("change", function () {
         var file = imageInput.files && imageInput.files[0];
