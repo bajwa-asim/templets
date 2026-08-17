@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,21 +15,6 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     />
     <style>
-      :root {
-        --page-bg: #ffffff;
-        --panel-bg: #ffffff;
-        --panel-border: #edf1f7;
-        --text-main: #1a1f36;
-        --text-soft: #7c859f;
-        --text-muted: #a2abc2;
-        --blue: #2284ff;
-        --blue-soft: #edf5ff;
-        --shadow: 0 8px 24px rgba(17, 24, 39, 0.05);
-        --radius-lg: 16px;
-        --radius-md: 12px;
-        --radius-sm: 8px;
-      }
-
       * {
         box-sizing: border-box;
       }
@@ -37,11 +22,11 @@
       body {
         margin: 0;
         font-family: "Inter", sans-serif;
-        color: var(--text-main);
+        color: #1a1f36;
         background: linear-gradient(180deg, #f8fafc 0, #ffffff 70px);
       }
 
-      .themes-page {
+      .thm-page {
         min-height: 100vh;
         padding: 24px 26px 32px;
       }
@@ -55,23 +40,37 @@
       }
 
       .themes-shell {
-        background: var(--panel-bg);
-        border: 1px solid var(--panel-border);
+        background: #ffffff;
+        border: 1px solid #edf1f7;
         border-radius: 18px;
-        box-shadow: var(--shadow);
+        box-shadow: 0 8px 24px rgba(17, 24, 39, 0.05);
         padding: 16px;
       }
 
       .themes-layout {
-        display: grid;
-        grid-template-columns: 258px minmax(0, 1fr);
-        gap: 22px;
+        margin-left: -11px;
+        margin-right: -11px;
         align-items: start;
+      }
+
+      .themes-layout > [class*="col-"] {
+        padding-left: 11px;
+        padding-right: 11px;
+      }
+
+      .thm-sidebar-col {
+        flex: 0 0 258px;
+        max-width: 258px;
+      }
+
+      .thm-main-col {
+        flex: 1 1 0%;
+        max-width: calc(100% - 258px);
       }
 
       .filter-card {
         background: #fff;
-        border: 1px solid var(--panel-border);
+        border: 1px solid #edf1f7;
         border-radius: 14px;
         box-shadow: 0 4px 18px rgba(17, 24, 39, 0.04);
         padding: 14px 14px 12px;
@@ -167,7 +166,7 @@
       }
 
       .category-link.is-active {
-        background: var(--blue);
+        background: #2284ff;
         color: #fff;
         box-shadow: 0 8px 14px rgba(34, 132, 255, 0.22);
         padding-left: 16px;
@@ -506,7 +505,7 @@
         font-size: 17px;
         line-height: 1.4;
         font-weight: 700;
-        color: var(--blue);
+        color: #2284ff;
         white-space: nowrap;
       }
 
@@ -609,8 +608,10 @@
       }
 
       @media (max-width: 991.98px) {
-        .themes-layout {
-          grid-template-columns: 1fr;
+        .thm-sidebar-col,
+        .thm-main-col {
+          flex: 0 0 100%;
+          max-width: 100%;
         }
 
         .toolbar {
@@ -619,7 +620,7 @@
       }
 
       @media (max-width: 767.98px) {
-        .themes-page {
+        .thm-page {
           padding: 16px;
         }
 
@@ -634,13 +635,13 @@
     </style>
   </head>
   <body>
-    <div class="themes-page">
+    <div class="thm-page">
       <div class="container-fluid px-0">
         <h1 class="themes-title">Themes</h1>
 
         <div class="themes-shell">
-          <div class="themes-layout">
-            <aside>
+          <div class="row themes-layout">
+            <aside class="col-12 thm-sidebar-col">
               <div class="filter-card" data-filter-card>
                 <button
                   class="filter-head"
@@ -723,7 +724,7 @@
               </div>
             </aside>
 
-            <section class="themes-content">
+            <section class="col-12 thm-main-col themes-content">
               <div class="toolbar">
                 <div class="toolbar-field">
                   <label>Search</label>
@@ -755,10 +756,42 @@
                       </svg>
                     </button>
                     <ul class="sort-menu" hidden role="listbox">
-                      <li><button type="button" class="sort-option is-active" data-sort="Newest first">Newest first</button></li>
-                      <li><button type="button" class="sort-option" data-sort="Oldest first">Oldest first</button></li>
-                      <li><button type="button" class="sort-option" data-sort="Price low to high">Price low to high</button></li>
-                      <li><button type="button" class="sort-option" data-sort="Price high to low">Price high to low</button></li>
+                      <li>
+                        <button
+                          type="button"
+                          class="sort-option is-active"
+                          data-sort="Newest first"
+                        >
+                          Newest first
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          class="sort-option"
+                          data-sort="Oldest first"
+                        >
+                          Oldest first
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          class="sort-option"
+                          data-sort="Price low to high"
+                        >
+                          Price low to high
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          type="button"
+                          class="sort-option"
+                          data-sort="Price high to low"
+                        >
+                          Price high to low
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 </div>
@@ -1630,3 +1663,4 @@
     </script>
   </body>
 </html>
+
